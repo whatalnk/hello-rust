@@ -6,9 +6,17 @@ fn main() {
         t: i32,
         x: i32
     }
-    if x >= s || x < t {
-        println!("Yes");
+    if s < t {
+        if x >= s && x < t {
+            println!("Yes");
+        } else {
+            println!("No");
+        }
     } else {
-        println!("No");
+        if x < t || x >= s {
+            println!("Yes");
+        } else {
+            println!("No");
+        }
     }
 }
