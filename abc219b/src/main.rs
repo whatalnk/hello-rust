@@ -8,15 +8,14 @@ fn main() {
         s3: String,
         t: Chars
     }
-    let mut ans: Vec<&str> = Vec::new();
+    let mut ans = String::new();
     for i in &t {
         match i {
-            '1' => ans.push(&s1),
-            '2' => ans.push(&s2),
-            '3' => ans.push(&s3),
+            '1' => ans += &s1,
+            '2' => ans += &s2,
+            '3' => ans += &s3,
             _ => break,
         }
     }
-    let a: String = ans.iter().map(|x| *x).collect();
-    println!("{}", a);
+    println!("{}", ans);
 }
