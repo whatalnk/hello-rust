@@ -1,15 +1,14 @@
 use proconio::input;
-use proconio::marker::Chars;
 
 fn main() {
     input! {
-        mut s: Chars
+        mut s: String
     }
     let mut ans: Vec<String> = Vec::new();
-    for _ in 0..s.len() {
-        let x = s.remove(0);
-        s.push(x);
-        ans.push(s.iter().collect::<String>());
+    let n = s.len();
+    for i in 0..s.len() {
+        let x = format!("{}{}", &s[i..n], &s[0..i]);
+        ans.push(x);
     }
     ans.sort();
     println!("{}", ans.first().unwrap());
