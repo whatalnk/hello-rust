@@ -16,10 +16,30 @@ fn main() {
         let v = hm.entry(l).or_insert(Vec::<usize>::new());
         v.push(i);
     }
-    for i in 0..n {
-        println!("{} {:?}", i, g[i]);
+    let mut checked = vec![false; n];
+    let mut ans = 0;
+    for (_, v) in &hm {
+        if v.len() == 1 {
+            ans += 1;
+            continue;
+        }
+        for i in 0..v.len() {
+            if checked[i] {
+                continue;
+            } else {
+                checked[i] = true;
+                ans += 1;
+            }
+            for j in (i + 1)..v.len() {
+                if checked[j] {
+                    continue;
+                } else {
+                    if g[v[i]] == g[v[j]] {
+                        checked[j] = true;
+                    }
+                }
+            }
+        }
     }
-    for (k, v) in &hm {
-        println!("{} {:?}", k, v);
-    }
+    println!("{}", ans);
 }
