@@ -3,39 +3,33 @@ use proconio::input;
 fn main() {
     input! {
         n: usize,
-        k: i32,
-        a: [i32; n],
-        b: [i32; n]
+        k: i64,
+        a: [i64; n],
+        b: [i64; n]
     }
-    let mut x = vec![0; n];
-    let mut ans1 = true;
-    x[0] = a[0];
-    for i in 0..(n - 1) {
-        if (x[i] - a[i + 1]).abs() <= k {
-            x[i + 1] = a[i + 1];
-        } else if (x[i] - b[i + 1]).abs() <= k {
-            x[i + 1] = b[i + 1];
-        } else {
-            ans1 = false;
-            break;
+    let mut dp = vec![false; n];
+    let mut ep = vec![false; n];
+    dp[0] = true;
+    ep[0] = true;
+    for i in 1..n {
+        if dp[i - 1] {
+            if (a[i - 1] - a[i]).abs() <= k {
+                dp[i] = true;
+            }
+            if (a[i - 1] - b[i]).abs() <= k {
+                ep[i] = true;
+            }
+        }
+        if ep[i - 1] {
+            if (b[i - 1] - a[i]).abs() <= k {
+                dp[i] = true;
+            }
+            if (b[i - 1] - b[i]).abs() <= k {
+                ep[i] = true;
+            }
         }
     }
-    println!("{:?}", x);
-    let mut x = vec![0; n];
-    let mut ans2 = true;
-    x[0] = b[0];
-    for i in 0..(n - 1) {
-        if (x[i] - b[i + 1]).abs() <= k {
-            x[i + 1] = b[i + 1];
-        } else if (x[i] - a[i + 1]).abs() <= k {
-            x[i + 1] = a[i + 1];
-        } else {
-            ans2 = false;
-            break;
-        }
-    }
-    println!("{:?}", x);
-    if ans1 || ans2 {
+    if dp[n - 1] || ep[n - 1] {
         println!("Yes");
     } else {
         println!("No");
