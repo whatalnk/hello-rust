@@ -4,9 +4,9 @@ use std::collections::BinaryHeap;
 fn main() {
     input! {
         n: usize,
-        k: i32,
-        x: i32,
-        a: [i32; n]
+        mut k: i64,
+        x: i64,
+        a: [i64; n]
     }
     let mut h = BinaryHeap::new();
     let mut ans = 0;
@@ -14,13 +14,17 @@ fn main() {
         ans += i;
         h.push(i);
     }
-    for _ in 0..k {
+    while k > 0 {
         if let Some(v) = h.pop() {
             if v > x {
-                h.push(v - x);
-                ans -= x;
+                let mut m = v / x;
+                m = m.min(k);
+                h.push(v % x);
+                ans -= x * m;
+                k -= m;
             } else {
                 ans -= v;
+                k -= 1;
             }
         } else {
             break;
