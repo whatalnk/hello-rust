@@ -14,69 +14,66 @@ fn main() {
             }
         }
     }
+    let mut ans = false;
     // よこ
     for i in 0..n {
         for j in 0..n {
-            if j + 5 > n - 1 {
-                break;
-            }
-            let mut rs = 0;
-            for d in 0..6 {
-                rs += s[i][j + d];
-            }
-            if rs >= 4 {
-                println!("Yes");
-                return;
+            if j + 5 <= n - 1 {
+                let mut rs = 0;
+                for d in 0..6 {
+                    rs += s[i][j + d];
+                }
+                if rs >= 4 {
+                    ans = true;
+                }
             }
         }
     }
     // たて
     for j in 0..n {
         for i in 0..n {
-            if i + 5 > n - 1 {
-                break;
-            }
-            let mut cs = 0;
-            for d in 0..6 {
-                cs += s[i + d][j];
-            }
-            if cs >= 4 {
-                println!("Yes");
-                return;
+            if i + 5 <= n - 1 {
+                let mut cs = 0;
+                for d in 0..6 {
+                    cs += s[i + d][j];
+                }
+                if cs >= 4 {
+                    ans = true;
+                }
             }
         }
     }
     // ななめ1
     for i in 0..n {
-        if i + 5 > n - 1 {
-            break;
-        }
         for j in 0..n {
-            if j + 5 > n - 1 {
-                break;
-            }
-            let mut ds = 0;
-            for d in 0..6 {
-                ds += s[i + d][j + d];
-            }
-            if ds >= 4 {
-                println!("Yes");
-                return;
+            if i + 5 <= n - 1 && j + 5 <= n - 1 {
+                let mut ds = 0;
+                for d in 0..6 {
+                    ds += s[i + d][j + d];
+                }
+                if ds >= 4 {
+                    ans = true;
+                }
             }
         }
     }
     // ななめ2
-    for i in 5..n {
-        for j in 5..n {
-            let mut ds = 0;
-            for d in 0..6 {
-                ds += s[i - d][j - d];
-            }
-            if ds >= 4 {
-                println!("Yes");
-                return;
+    for i in 0..n {
+        for j in 0..n {
+            if i >= 5 && j >= 5 {
+                let mut ds = 0;
+                for d in 0..6 {
+                    ds += s[i - d][j - d];
+                }
+                if ds >= 4 {
+                    ans = true;
+                }
             }
         }
     }
-    println!("No");
+    if ans {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
 }
