@@ -60,10 +60,10 @@ fn main() {
     // ななめ2
     for i in 0..n {
         for j in 0..n {
-            if i >= 5 && j >= 5 {
+            if i + 5 <= n - 1 && j >= 5 {
                 let mut ds = 0;
                 for d in 0..6 {
-                    ds += s[i - d][j - d];
+                    ds += s[i + d][j - d];
                 }
                 if ds >= 4 {
                     ans = true;
