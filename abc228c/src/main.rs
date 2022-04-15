@@ -1,13 +1,12 @@
 use proconio::input;
 
 fn main() {
-    let max_s = 1200;
     input! {
         n: usize,
-        k: i64
+        k: usize
     }
     let mut a = vec![];
-    let mut p = vec![0; max_s + 2];
+    let mut b = vec![];
     for _ in 0..n {
         input! {
             a1: i64,
@@ -16,19 +15,17 @@ fn main() {
         }
         let s = a1 + a2 + a3;
         a.push(s);
-        p[s as usize] += 1;
+        b.push(s);
     }
-    let mut pp = vec![0; max_s + 2];
-    pp[max_s] = p[max_s];
-    for i in 0..max_s {
-        pp[max_s - i - 1] = pp[max_s - i] + p[max_s - i - 1];
-    }
-    for s in a {
-        let score = s + 300;
-        let mut rank = pp[score as usize];
-        if p[score as usize] == 0 {
-            rank += 1;
-        }
+    a.sort();
+    for i in b {
+        let s = i + 300;
+        let res = a.binary_search(&s);
+        let ans = match res {
+            Ok(v) => v + 1,
+            Err(v) => v,
+        };
+        let rank = n - ans + 1;
         if rank <= k {
             println!("Yes");
         } else {
