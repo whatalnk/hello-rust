@@ -7,25 +7,21 @@ fn main() {
         m: usize,
         k: usize
     }
-    let mut dp: Vec<Vec<u128>> = vec![vec![0; n]; m];
-    for r in 0..m {
-        if r <= k {
-            dp[r][0] = 1;
-        }
-    }
-    for c in 0..(n - 1) {
-        for r in 0..m {
-            for d in 0..m {
-                if r + d + 2 <= k {
-                    dp[d][c + 1] += dp[r][c];
-                    dp[d][c + 1] %= md;
+    let mut dp: Vec<Vec<u128>> = vec![vec![0; k + 1]; n + 1];
+    dp[0][0] = 1;
+    for i in 0..n {
+        for j in 0..k {
+            for d in 1..=m {
+                if j + d <= k {
+                    dp[i + 1][j + d] += dp[i][j];
+                    dp[i][j] %= md;
                 }
             }
         }
     }
     let mut ans = 0;
-    for r in 0..m {
-        ans += dp[r][n - 1];
+    for i in 1..=k {
+        ans += dp[n][i];
         ans %= md;
     }
     println!("{}", ans);
