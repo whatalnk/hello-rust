@@ -13,30 +13,23 @@ fn main() {
     let h = (q - p + 1) as usize;
     let w = (s - r + 1) as usize;
     let mut m = vec![vec!['.'; w]; h];
-    let kmin = (1 - a).max(1 - b);
-    let kmax = (n - a).min(n - b);
-    println!("{} {}", kmin, kmax);
+    let kmin1 = (1 - a).max(1 - b);
+    let kmax1 = (n - a).min(n - b);
+    let kmin2 = (1 - a).max(b - n);
+    let kmax2 = (n - a).min(b - 1);
     for i in p..=q {
         for j in r..=s {
-            let ki = (i as i128) - a;
-            let kj = (j as i128) - b;
-            if ki > kmin && ki < kmax && kj > kmin && kj < kmax {
-                println!("{} {}, {} {}", i - p, j - r, ki, kj);
+            let ki = i - a;
+            let kj1 = j - b;
+            let kj2 = b - j;
+            if ki == kj1 && ki >= kmin1 && ki <= kmax1 && kj1 >= kmin1 && kj1 <= kmax1 {
+                m[(i - p) as usize][(j - r) as usize] = '#';
+            }
+            if ki == kj2 && ki >= kmin2 && ki <= kmax2 && kj2 >= kmin2 && kj2 <= kmax2 {
                 m[(i - p) as usize][(j - r) as usize] = '#';
             }
         }
     }
-    // let kmin = (1 - a).max(b - n);
-    // let kmax = (n - a).min(b - 1);
-    // for i in 0..h {
-    //     for j in 0..w {
-    //         let ki = (i as i128) - a + p;
-    //         let kj = b - r - (j as i128);
-    //         if ki >= kmin && ki <= kmax && kj >= kmin && kj <= kmax {
-    //             m[i][j] = '#';
-    //         }
-    //     }
-    // }
     for i in 0..h {
         println!("{}", m[i].iter().collect::<String>());
     }
