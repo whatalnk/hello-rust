@@ -23,9 +23,11 @@ fn main() {
     while q.len() > 0 {
         let i = q.pop().unwrap();
         for a in &aa[i - 1] {
-            hs.insert(*a);
-            if a != &0 {
-                q.push(*a);
+            if !hs.contains(a) {
+                hs.insert(*a);
+                if a != &1 {
+                    q.push(*a);
+                }
             }
         }
     }
