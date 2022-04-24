@@ -1,33 +1,30 @@
 use proconio::input;
 use proconio::marker::Chars;
-use std::collections::HashSet;
 
 fn main() {
     input! {
         n: usize,
-        k: i32
+        k: i32,
+        s: [Chars; n]
     }
-    let mut m = vec![HashSet::<char>::new(); n];
-    for i in 0..n {
-        input! {
-            s: Chars
-        }
-        for c in s {
-            m[i].insert(c);
-        }
-    }
-    let a = "abcdefghijklmnopqrstuvwxyz".chars();
     let mut ans = 0;
-    for c in a {
-        let mut cnt = 0;
-        for i in 0..n {
-            if m[i].contains(&c) {
-                cnt += 1;
+    let a = 'a' as u8;
+    for i in 0..(1 << n) {
+        let mut sum = vec![0; 26];
+        for j in 0..n {
+            if (i >> j) & 1 > 0 {
+                for x in 0..(s[j].len()) {
+                    sum[(s[j][x] as u8 - a) as usize] += 1;
+                }
             }
         }
-        if cnt >= k {
-            ans += 1;
+        let mut now = 0;
+        for j in 0..26 {
+            if sum[j] == k {
+                now += 1;
+            }
         }
+        ans = ans.max(now);
     }
     println!("{}", ans);
 }
