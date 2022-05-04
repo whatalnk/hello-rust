@@ -13,13 +13,7 @@ fn main() {
     }
     let mut ans = 0;
     for (_, v) in &hm {
-        for i in 0..(v.len()) {
-            for j in (i + 1)..(v.len()) {
-                if (a[v[i]] - a[v[j]]) % 200 == 0 {
-                    ans += 1;
-                }
-            }
-        }
+        ans += v.len() * (v.len() - 1) / 2;
     }
     println!("{}", ans);
 }
