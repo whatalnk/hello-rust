@@ -16,13 +16,13 @@ fn main() {
         hm.insert(i, i);
     }
     for i in x {
-        let l = hm.get(&i).unwrap();
+        let l = hm.remove(&i).unwrap();
         let mut r = l + 1;
-        if l == &n {
+        if l == n {
             r = l - 1;
         }
         b.swap(l - 1, r - 1);
-        hm.insert(b[l - 1], *l);
+        hm.insert(b[l - 1], l);
         hm.insert(b[r - 1], r);
     }
     println!(
