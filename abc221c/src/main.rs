@@ -3,40 +3,22 @@ use proconio::marker::Chars;
 
 fn main() {
     input! {
-        n: Chars,
+        mut n: Chars,
     }
+    n.sort();
+    n.reverse();
     let l = n.len();
     let mut ans = 0;
     for i in 0..(1 << l) {
-        let mut left = Vec::new();
-        let mut right = Vec::new();
+        let mut left = 0;
+        let mut right = 0;
         for j in 0..l {
-            if (i & (j << 1)) > 0 {
-                left.push(n[j])
+            if (i & (1 << j)) > 0 {
+                left = left * 10 + n[j].to_digit(10).unwrap();
             } else {
-                right.push(n[j]);
+                right = right * 10 + n[j].to_digit(10).unwrap();
             }
-        }
-        if left.len() > 0 && right.len() > 0 {
-            left.sort();
-            left.reverse();
-            right.sort();
-            right.reverse();
-            let n_left: i64 = left
-                .iter()
-                .map(|x| x.to_string())
-                .collect::<Vec<String>>()
-                .join("")
-                .parse()
-                .unwrap();
-            let n_right: i64 = right
-                .iter()
-                .map(|x| x.to_string())
-                .collect::<Vec<String>>()
-                .join("")
-                .parse()
-                .unwrap();
-            ans = ans.max(n_left * n_right);
+            ans = ans.max(left * right);
         }
     }
     println!("{}", ans);
