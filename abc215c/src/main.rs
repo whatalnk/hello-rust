@@ -6,25 +6,18 @@ use std::collections::HashSet;
 struct MyStruct {
     n: usize,
     s: Vec<char>,
-    hs: RefCell<HashSet<String>>,
+    v: RefCell<Vec<String>>,
 }
 
 impl MyStruct {
-    fn f(&self, used: Vec<usize>) {
-        if used.len() == self.n {
-            let ret: String = used
-                .iter()
-                .map(|i| self.s[*i].to_string())
-                .collect::<Vec<String>>()
-                .join("");
-            self.hs.borrow_mut().insert(ret);
+    fn f(&self, used: i32, ret: String) {
+        if used == (1 << self.n) - 1 {
+            self.v.borrow_mut().push(ret);
             return;
         }
         for i in 0..self.n {
-            if !used.contains(&i) {
-                let mut used_ = used.clone();
-                used_.push(i);
-                self.f(used_);
+            if (used & (1 << i)) == 0 {
+                self.f(used | (1 << i), ret.clone() + &self.s[i].to_string());
             }
         }
     }
@@ -36,14 +29,21 @@ fn main() {
          k: usize
     }
     let n = s.len();
-    let hs = HashSet::<String>::new();
+    let v = Vec::<String>::new();
     let mut mystruct = MyStruct {
         n: n,
         s: s,
-        hs: RefCell::new(hs),
+        v: RefCell::new(v),
     };
-    mystruct.f(vec![]);
-    let mut v: Vec<String> = mystruct.hs.get_mut().clone().into_iter().collect();
-    v.sort();
-    println!("{}", v[k - 1]);
+    mystruct.f(0, "".to_string());
+    let mut vv: Vec<String> = mystruct
+        .v
+        .get_mut()
+        .clone()
+        .into_iter()
+        .collect::<HashSet<_>>()
+        .into_iter()
+        .collect();
+    vv.sort();
+    println!("{}", vv[k - 1]);
 }
