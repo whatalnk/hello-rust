@@ -9,9 +9,16 @@ fn main() {
     }
     a.sort();
     b.sort();
-    for i in 0..n {
-        for j in 0..m {
-            println!("{} {} {}", (a[i] - b[j]).abs(), a[i], b[j]);
+    let mut ans: i64 = 1_000_000_000;
+    let mut x = 0;
+    let mut y = 0;
+    while (x < n) && (y < m) {
+        ans = ans.min((a[x] - b[y]).abs());
+        if a[x] > b[y] {
+            y += 1;
+        } else {
+            x += 1;
         }
     }
+    println!("{}", ans);
 }
