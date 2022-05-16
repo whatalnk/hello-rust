@@ -7,24 +7,20 @@ fn main() {
         k: usize,
         c: [i64; n]
     }
-    let mut hs = HashMap::new();
+    let mut hs = HashMap::<i64, i64>::new();
     for i in 0..k {
         let e = hs.entry(c[i]).or_insert(0);
         *e += 1;
     }
     let mut ans = hs.len();
     for i in k..n {
-        let mut ans_ = ans;
         hs.entry(c[i - k]).and_modify(|e| *e -= 1);
         if hs[&c[i - k]] == 0 {
-            ans_ -= 1;
+            hs.remove(&c[i - k]);
         }
         let e = hs.entry(c[i]).or_insert(0);
         *e += 1;
-        if hs[&c[i]] == 1 {
-            ans_ += 1;
-        }
-        ans = ans.max(ans_);
+        ans = ans.max(hs.len());
     }
     println!("{}", ans);
 }
