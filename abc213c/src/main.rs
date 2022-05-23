@@ -19,16 +19,19 @@ fn main() {
     let mut b: Vec<_> = sb.iter().collect();
     a.sort();
     b.sort();
-    let hh = a.len();
-    let ww = b.len();
-    let mut dict = HashMap::new();
-    for i in 0..hh {
-        for j in 0..ww {
-            dict.insert((*a[i], *b[j]), (i + 1, j + 1));
-        }
+    let mut ai = HashMap::new();
+    let mut bi = HashMap::new();
+    for i in 0..a.len() {
+        ai.insert(*a[i], i + 1);
+    }
+    for i in 0..b.len() {
+        bi.insert(*b[i], i + 1);
     }
     for i in 0..n {
-        let k = dict.get(&ab[i]).unwrap();
-        println!("{} {}", k.0, k.1);
+        println!(
+            "{} {}",
+            ai.get(&ab[i].0).unwrap(),
+            bi.get(&ab[i].1).unwrap()
+        );
     }
 }
