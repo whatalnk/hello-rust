@@ -7,5 +7,11 @@ fn main() {
         y: f64
     }
     let d = (x * x + y * y).sqrt();
-    println!("{}", (d / r).ceil());
+    if d == r {
+        println!("1");
+    } else if d <= r + r {
+        println!("2");
+    } else {
+        println!("{}", (d / r).ceil());
+    }
 }
