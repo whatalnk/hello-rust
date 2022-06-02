@@ -4,42 +4,28 @@ fn main() {
     input! {
         n: usize,
         m: usize,
-        mut k: i64,
+     k: i64,
         a: [i64; n],
         b: [i64; m]
     }
+    let mut aa = vec![0; n];
+    let mut bb = vec![0; m];
+    aa[0] = a[0];
+    bb[0] = b[0];
+    for i in 1..n {
+        aa[i] = aa[i - 1] + a[i];
+    }
+    for i in 1..m {
+        bb[i] = bb[i - 1] + b[i];
+    }
     let mut ans = 0;
-    let mut i = 0;
-    let mut j = 0;
-    loop {
-        if i < n && j < m {
-            if a[i] < b[j] && k >= a[i] {
-                k -= a[i];
-                ans += 1;
-                i += 1;
-            } else if a[i] >= b[j] && k >= b[j] {
-                k -= b[j];
-                ans += 1;
-                j += 1;
-            } else {
-                break;
-            }
-        } else if i < n && j >= m {
-            if k >= a[i] {
-                k -= a[i];
-                ans += 1;
-                i += 1;
-            } else {
-                break;
-            }
-        } else if i >= n && j < m {
-            if k >= b[j] {
-                k -= b[j];
-                ans += 1;
-                j += 1;
-            } else {
-                break;
-            }
+    for i in 0..n {
+        if aa[i] < k {
+            let v = match bb.binary_search(&(k - aa[i])) {
+                Ok(x) => x + 1,
+                Err(x) => x,
+            };
+            ans = ans.max(i + 1 + v);
         } else {
             break;
         }
