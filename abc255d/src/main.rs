@@ -14,13 +14,16 @@ fn main() {
         b.push(b[i - 1] + a[i]);
     }
     for i in 0..q {
-        let mut j = match a.binary_search(&x[i]) {
+        let j = match a.binary_search(&x[i]) {
             Ok(v) => v,
-            Err(v) => v,
+            Err(v) => {
+                if v > 0 {
+                    v - 1
+                } else {
+                    v
+                }
+            }
         };
-        if j >= n {
-            j -= 1;
-        }
         let mut left = b[j];
         let mut right = b[n - 1] - b[j];
         let mut cnt = (j + 1) as i64;
