@@ -16,7 +16,7 @@ fn main() {
             r: usize,
             x: usize
         }
-        let right = match idx[x].binary_search(&(r - 1)) {
+        let right = match idx[x].binary_search(&r) {
             Ok(v) => v,
             Err(v) => v,
         };
