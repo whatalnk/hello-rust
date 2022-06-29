@@ -8,25 +8,25 @@ fn main() {
         mut w: [i64; n]
     }
     let mut ws = vec![];
+    let mut adult = 0;
     for i in 0..n {
-        ws.push((w[i], s[i]));
+        let si = s[i].to_digit(10).unwrap() as i64;
+        adult += si;
+        ws.push((w[i], si));
     }
     ws.sort();
-    // w.sort();
-    let mut ss = vec![];
-    ss.push(0);
-    ss.push(ws[0].1.to_digit(10).unwrap() as i64);
-    for i in 1..n {
-        ss.push(ss[i] + ws[i].1.to_digit(10).unwrap() as i64);
+    let mut ans = adult;
+    let mut ans_ = ans;
+    // All adult
+    for i in 0..n {
+        // i is child
+        if ws[i].1 == 0 {
+            ans_ += 1;
+        } else {
+            ans_ -= 1;
+        }
+        ans = ans.max(ans_);
     }
-    ss.push(ss[n - 1]);
-    let mut ans = 0;
-    for i in 0..=n {
-        let may_be_child = i as i64;
-        let may_be_adult = n as i64 - may_be_child;
-        let adult = ss[i];
-        let child = n as i64 - adult;
-        ans = ans.max(may_be_child.min(child) + may_be_adult.min(adult));
-    }
+    // wi が同じものがあると、これではダメ
     println!("{}", ans);
 }
