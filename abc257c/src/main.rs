@@ -1,5 +1,6 @@
 use proconio::input;
 use proconio::marker::Chars;
+use std::collections::HashMap;
 
 fn main() {
     input! {
@@ -7,26 +8,27 @@ fn main() {
         s: Chars,
         mut w: [i64; n]
     }
-    let mut ws = vec![];
+    let mut hm0 = HashMap::<i64, i64>::new();
+    let mut hm1 = HashMap::<i64, i64>::new();
     let mut adult = 0;
     for i in 0..n {
         let si = s[i].to_digit(10).unwrap() as i64;
         adult += si;
-        ws.push((w[i], si));
-    }
-    ws.sort();
-    let mut ans = adult;
-    let mut ans_ = ans;
-    // All adult
-    for i in 0..n {
-        // i is child
-        if ws[i].1 == 0 {
-            ans_ += 1;
+        let e0 = hm0.entry(w[i]).or_insert(0);
+        let e1 = hm1.entry(w[i]).or_insert(0);
+        if si == 0 {
+            *e0 += 1;
         } else {
-            ans_ -= 1;
+            *e1 += 1;
         }
-        ans = ans.max(ans_);
     }
-    // wi が同じものがあると、これではダメ
+    let mut ww = hm0.keys().cloned().collect::<Vec<i64>>();
+    ww.sort();
+    let mut ans = adult;
+    for i in 0..(ww.len()) {
+        adult += hm0[&ww[i]];
+        adult -= hm1[&ww[i]];
+        ans = ans.max(adult);
+    }
     println!("{}", ans);
 }
