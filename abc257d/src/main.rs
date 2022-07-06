@@ -36,9 +36,20 @@ fn main() {
         xyp: [(i64, i64, i64); n]
     }
     let s = S { n: n, xyp: xyp };
+    let mut ans = 10_000_000_000;
     for i in 0..n {
-        for j in 0..5 {
-            println!("{} {} {}", i, j, s.f(i, j));
+        let mut left = 0;
+        let mut right = 10_000_000_000;
+        while right - left > 1 {
+            let mid = (left + right) / 2;
+            let x = s.f(i, mid);
+            if x {
+                right = mid;
+            } else {
+                left = mid;
+            }
         }
+        ans = ans.min(right);
     }
+    println!("{}", ans);
 }
