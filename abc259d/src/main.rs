@@ -4,19 +4,19 @@ use std::collections::VecDeque;
 fn main() {
     input! {
         n: usize,
-        sx: f64,
-        sy: f64,
-        tx: f64,
-        ty: f64,
-        xyr: [(f64, f64, f64); n]
+        sx: i64,
+        sy: i64,
+        tx: i64,
+        ty: i64,
+        xyr: [(i64, i64, i64); n]
     }
     let mut g = vec![vec![0; n]; n];
     for i in 0..n {
         for j in 0..n {
             let (xi, yi, ri) = xyr[i];
             let (xj, yj, rj) = xyr[j];
-            let d = ((xi - xj) * (xi - xj) + (yi - yj) * (yi - yj)).sqrt();
-            if d > ri + rj || d < (ri - rj).abs() {
+            let d = (xi - xj) * (xi - xj) + (yi - yj) * (yi - yj);
+            if d > (ri + rj) * (ri + rj) || d < (ri - rj) * (ri - rj) {
                 g[i][j] = 0;
                 g[j][i] = 0;
             } else {
@@ -29,15 +29,11 @@ fn main() {
     let mut t = vec![];
     for i in 0..n {
         let (xi, yi, ri) = xyr[i];
-        if (ri as i64) * (ri as i64)
-            == ((xi - sx) as i64) * ((xi - sx) as i64) + ((yi - sy) as i64) * ((yi - sy) as i64)
-        {
+        if ri * ri == (xi - sx) * (xi - sx) + (yi - sy) * (yi - sy) {
             s.push(i);
         }
 
-        if (ri as i64) * (ri as i64)
-            == ((xi - tx) as i64) * ((xi - tx) as i64) + ((yi - ty) as i64) * ((yi - ty) as i64)
-        {
+        if ri * ri == (xi - tx) * (xi - tx) + (yi - ty) * (yi - ty) {
             t.push(i);
         }
     }
