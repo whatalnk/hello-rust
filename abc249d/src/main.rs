@@ -10,15 +10,11 @@ fn main() {
     for i in 0..n {
         cnt[a[i] as usize] += 1;
     }
-    let mut ans = 0;
-    for i in 0..n {
+    let mut ans: i64 = 0;
+    for i in 1..=n_max {
         let mut j = 1;
-        while j * j <= a[i] {
-            if a[i] % j == 0 {
-                let cnt_j = cnt[j as usize];
-                let cnt_k = cnt[(a[i] / j) as usize];
-                ans += cnt_j * cnt_k * 2;
-            }
+        while i * j <= n_max {
+            ans += cnt[i] * cnt[j] * cnt[i * j];
             j += 1;
         }
     }
