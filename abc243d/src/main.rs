@@ -4,37 +4,37 @@ use proconio::marker::Chars;
 fn main() {
     input! {
         n: usize,
-        x: i128,
+        mut x: i64,
         s: Chars
     }
-    let mut xx = x;
-    let mut k: i128 = 0;
-    while xx > 1 {
-        xx /= 2;
-        k += 1;
+    let mut xb = vec![];
+    while x > 0 {
+        if x % 2 == 0 {
+            xb.push('0');
+        } else {
+            xb.push('1');
+        }
+        x /= 2;
     }
-    let mut r: i128 = 1;
-    for _ in 0..k {
-        r *= 2;
-    }
-    r = x - r;
+    xb.reverse();
     for i in 0..n {
         if s[i] == 'U' {
-            k -= 1;
-            r /= 2;
+            xb.pop();
         } else if s[i] == 'L' {
-            k += 1;
-            r *= 2;
+            xb.push('0');
         } else {
-            // 'R'
-            k += 1;
-            r = r * 2 + 1;
+            // R
+            xb.push('1');
         }
     }
-    let mut ans = 1;
-    for _ in 0..k {
-        ans *= 2;
+    xb.reverse();
+    let mut ans: i64 = 0;
+    let mut a: i64 = 1;
+    for i in 0..xb.len() {
+        if xb[i] == '1' {
+            ans += a;
+        }
+        a *= 2;
     }
-    ans += r;
     println!("{}", ans);
 }
