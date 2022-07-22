@@ -4,22 +4,28 @@ use proconio::marker::Chars;
 fn main() {
     input! {
         n: usize,
-        mut x: i64,
+        x: i64,
         s: Chars
     }
+    let mut xx = x;
+    let mut k = 0;
+    while xx > 1 {
+        xx /= 2;
+        k += 1;
+    }
+    let mut r = x - (2 as i64).pow(k);
     for i in 0..n {
         if s[i] == 'U' {
-            if x % 2 == 0 {
-                x /= 2;
-            } else {
-                x = (x - 1) / 2;
-            }
+            k -= 1;
+            r /= 2;
         } else if s[i] == 'L' {
-            x *= 2;
+            k += 1;
+            r *= 2;
         } else {
-            // R
-            x = x * 2 + 1;
+            // 'R'
+            k += 1;
+            r = r * 2 + 1;
         }
     }
-    println!("{}", x);
+    println!("{}", (2 as i64).pow(k) + r);
 }
