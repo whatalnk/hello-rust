@@ -1,56 +1,53 @@
 use proconio::input;
-use std::collections::BinaryHeap;
+use std::collections::BTreeMap;
+use std::ops::Bound::Included;
 
 fn main() {
     input!(n: usize);
-    let mut a = BinaryHeap::new();
+    let mut a = BTreeMap::new();
+    let x_max: i64 = 1_000_000_000_000_000_000;
     for _ in 0..n {
         input!(c: u32);
         match c {
             1 => {
                 input!(x: i64);
-                a.push(x);
+                let e = a.entry(x).or_insert(0);
+                *e += 1
             }
             2 => {
                 input!(x: i64, k: usize);
-                let b = a.clone().into_sorted_vec();
-                let idx = b.binary_search(&x);
-                match idx {
-                    Ok(idx) => {
-                        if k <= idx {
-                            println!("{}", b[idx - k + 1]);
-                        } else {
-                            println!("-1");
+                let mut it = a.range((Included(&0), Included(&x)));
+                let mut cnt = 0;
+                for _ in 0..5 {
+                    if let Some(e) = it.next_back() {
+                        let (key, value) = e;
+                        cnt += value;
+                        if cnt >= k {
+                            println!("{}", key);
+                            break;
                         }
                     }
-                    Err(idx) => {
-                        if k <= idx {
-                            println!("{}", b[idx - k]);
-                        } else {
-                            println!("-1");
-                        }
-                    }
+                }
+                if cnt < k {
+                    println!("-1");
                 }
             }
             _ => {
                 input!(x: i64, k: usize);
-                let b = a.clone().into_sorted_vec();
-                let idx = b.binary_search(&x);
-                match idx {
-                    Ok(idx) => {
-                        if k <= b.len() - idx {
-                            println!("{}", b[idx + k - 1]);
-                        } else {
-                            println!("-1");
+                let mut it = a.range((Included(x), Included(x_max)));
+                let mut cnt = 0;
+                for _ in 0..5 {
+                    if let Some(e) = it.next() {
+                        let (key, value) = e;
+                        cnt += value;
+                        if cnt >= k {
+                            println!("{}", key);
+                            break;
                         }
                     }
-                    Err(idx) => {
-                        if k <= b.len() - idx {
-                            println!("{}", b[idx + k - 1]);
-                        } else {
-                            println!("-1");
-                        }
-                    }
+                }
+                if cnt < k {
+                    println!("-1");
                 }
             }
         }
