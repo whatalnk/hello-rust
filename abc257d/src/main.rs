@@ -17,7 +17,7 @@ impl S {
             for j in 0..self.n {
                 if g[i][j] == 0 && !done[j] {
                     let (xi, yi, pi) = self.xyp[i];
-                    let (xj, yj, pj) = self.xyp[j];
+                    let (xj, yj, _) = self.xyp[j];
                     if s * pi - ((xi - xj).abs() + (yi - yj).abs()) >= 0 {
                         g[i][j] = 1;
                         done[j] = true;

@@ -4,6 +4,7 @@ fn bit(x: i64, i: i64) -> i64 {
     return (x >> i) & 1;
 }
 
+#[allow(unused_assignments)]
 fn main() {
     input! {
         n: usize,
