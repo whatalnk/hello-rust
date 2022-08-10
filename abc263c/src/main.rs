@@ -16,7 +16,7 @@ fn main() {
         n: usize,
         m: usize,
     }
-    for i in 1..=n {
+    for i in 1..=m {
         f(n, m, 1, i, i.to_string());
     }
 }
