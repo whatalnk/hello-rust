@@ -1,0 +1,11 @@
+[package]
+name = "abc233d"
+version = "0.1.0"
+edition = "2018"
+
+[dev-dependencies]
+cli_test_dir = "*"
+
+[dependencies]
+proconio = { version = "=0.3.6", features = ["derive"] }
+
