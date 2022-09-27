@@ -1855,7 +1855,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "abc27b"
+name = "abc270b"
+version = "0.1.0"
+dependencies = [
+ "cli_test_dir",
+ "itertools",
+ "proconio",
+]
+
+[[package]]
+name = "abc270c"
 version = "0.1.0"
 dependencies = [
  "cli_test_dir",
