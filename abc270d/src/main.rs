@@ -6,37 +6,14 @@ fn main() {
         k: usize,
         a: [usize; k]
     }
-    let mut ans = 0;
-    while n > 0 {
-        let s = a.binary_search(&n);
-        match s {
-            Ok(v) => {
-                n -= a[v];
-                ans += a[v];
+    let mut dp = vec![0; n + 1];
+    for i in 0..=n {
+        for j in 0..k {
+            if a[j] > i {
+                break;
             }
-            Err(e) => {
-                if e == 0 {
-                    break;
-                } else {
-                    n -= a[e - 1];
-                    ans += a[e - 1];
-                }
-            }
-        }
-
-        let s = a.binary_search(&n);
-        match s {
-            Ok(v) => {
-                n -= a[v];
-            }
-            Err(e) => {
-                if e == 0 {
-                    break;
-                } else {
-                    n -= a[e - 1];
-                }
-            }
+            dp[i] = dp[i].max(i - dp[i - a[j]])
         }
     }
-    println!("{}", ans);
+    println!("{}", dp[n]);
 }
