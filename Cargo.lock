@@ -520,6 +520,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "abc230d"
+version = "0.1.0"
+dependencies = [
+ "cli_test_dir",
+ "itertools",
+ "proconio",
+]
+
+[[package]]
 name = "abc231a"
 version = "0.1.0"
 dependencies = [
