@@ -1,5 +1,5 @@
 use proconio::input;
-use std::collections::HashMap;
+use std::collections::{BinaryHeap, HashMap};
 
 fn main() {
     input! {
@@ -12,14 +12,22 @@ fn main() {
         q: usize,
         dl: [(char, usize); q],
     }
-    let mut hmc = HashMap::new();
-    let mut hmr = HashMap::new();
+    let mut hmc_ = HashMap::new();
+    let mut hmr_ = HashMap::new();
     for i in 0..n {
         let (r, c) = rc[i];
-        let e = hmc.entry(c).or_insert(vec![]);
+        let e = hmc_.entry(c).or_insert(BinaryHeap::new());
         e.push(r);
-        let e = hmr.entry(r).or_insert(vec![]);
+        let e = hmr_.entry(r).or_insert(BinaryHeap::new());
         e.push(c);
+    }
+    let mut hmc = HashMap::new();
+    let mut hmr = HashMap::new();
+    for (k, v) in &hmc_ {
+        hmc.insert(k, v.clone().into_sorted_vec());
+    }
+    for (k, v) in &hmr_ {
+        hmr.insert(k, v.clone().into_sorted_vec());
     }
     for i in 0..q {
         let (d, l) = dl[i];
@@ -32,10 +40,16 @@ fn main() {
                 ce = 1;
             }
             if let Some(v) = hmr.get(&rs) {
-                let x1 = v.binary_search(&cs).unwrap_();
-                let x2 = v.binary_search(&ce).unwrap();
+                let x1 = match v.binary_search(&cs) {
+                    Ok(vv) => vv,
+                    Err(vv) => vv,
+                };
+                let x2 = match v.binary_search(&ce) {
+                    Ok(vv) => vv,
+                    Err(vv) => vv,
+                };
                 if x1 != x2 {
-                    ce = ce.max(v[x1] + 1);
+                    ce = ce.max(v[x1.min(v.len() - 1)] + 1);
                 }
             }
         } else if d == 'R' {
@@ -45,10 +59,16 @@ fn main() {
                 ce = w;
             }
             if let Some(v) = hmr.get(&rs) {
-                let x1 = v.binary_search(&cs).unwrap();
-                let x2 = v.binary_search(&ce).unwrap();
+                let x1 = match v.binary_search(&cs) {
+                    Ok(vv) => vv,
+                    Err(vv) => vv,
+                };
+                let x2 = match v.binary_search(&ce) {
+                    Ok(vv) => vv,
+                    Err(vv) => vv,
+                };
                 if x1 != x2 {
-                    ce = ce.min(v[x1] - 1);
+                    ce = ce.min(v[x1.min(v.len() - 1)] - 1);
                 }
             }
         } else if d == 'U' {
@@ -58,10 +78,16 @@ fn main() {
                 re = 1;
             }
             if let Some(v) = hmc.get(&cs) {
-                let x1 = v.binary_search(&rs).unwrap();
-                let x2 = v.binary_search(&re).unwrap();
+                let x1 = match v.binary_search(&rs) {
+                    Ok(vv) => vv,
+                    Err(vv) => vv,
+                };
+                let x2 = match v.binary_search(&re) {
+                    Ok(vv) => vv,
+                    Err(vv) => vv,
+                };
                 if x1 != x2 {
-                    re = re.max(v[x1] + 1);
+                    re = re.max(v[x1.min(v.len() - 1)] + 1);
                 }
             }
         } else {
@@ -71,14 +97,20 @@ fn main() {
                 re = h;
             }
             if let Some(v) = hmc.get(&cs) {
-                let x1 = v.binary_search(&rs).unwrap();
-                let x2 = v.binary_search(&re).unwrap();
+                let x1 = match v.binary_search(&rs) {
+                    Ok(vv) => vv,
+                    Err(vv) => vv,
+                };
+                let x2 = match v.binary_search(&re) {
+                    Ok(vv) => vv,
+                    Err(vv) => vv,
+                };
                 if x1 != x2 {
-                    re = re.min(v[x1] - 1);
+                    re = re.min(v[x1.min(v.len() - 1)] - 1);
                 }
             }
         }
-        println!("{:?} -> {:?}", (rs, cs), (re, ce));
+        println!("{} {}", re, ce);
         rs = re;
         cs = ce;
     }
