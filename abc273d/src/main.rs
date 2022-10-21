@@ -34,80 +34,47 @@ fn main() {
         let mut re = rs;
         let mut ce = cs;
         if d == 'L' {
-            if cs > l {
-                ce -= l;
-            } else {
-                ce = 1;
-            }
             if let Some(v) = hmr.get(&rs) {
-                let x1 = match v.binary_search(&cs) {
-                    Ok(vv) => vv,
-                    Err(vv) => vv,
-                };
-                let x2 = match v.binary_search(&ce) {
-                    Ok(vv) => vv,
-                    Err(vv) => vv,
-                };
-                if x1 != x2 {
-                    ce = ce.max(v[x1.min(v.len() - 1)] + 1);
+                let j = v.binary_search(&cs).unwrap_err();
+                match j {
+                    0 => ce = (ce - l).max(1),
+                    _ if j == v.len() => ce = (ce - l).max(v[j - 1] + 1),
+                    _ => ce = (ce - l).max(v[j] + 1),
                 }
+            } else {
+                ce = (ce - l).max(1);
             }
         } else if d == 'R' {
-            if cs + l <= w {
-                ce += l;
-            } else {
-                ce = w;
-            }
             if let Some(v) = hmr.get(&rs) {
-                let x1 = match v.binary_search(&cs) {
-                    Ok(vv) => vv,
-                    Err(vv) => vv,
-                };
-                let x2 = match v.binary_search(&ce) {
-                    Ok(vv) => vv,
-                    Err(vv) => vv,
-                };
-                if x1 != x2 {
-                    ce = ce.min(v[x1.min(v.len() - 1)] - 1);
+                let j = v.binary_search(&cs).unwrap_err();
+                println!("v={:?}, cs={}, j={}", v, cs, j);
+                match j {
+                    _ if j == v.len() => ce = (ce + l).min(w),
+                    _ => ce = (ce + l).min(v[j + 1] - 1),
                 }
+            } else {
+                ce = (ce + l).min(w);
             }
         } else if d == 'U' {
-            if rs > l {
-                re -= l;
-            } else {
-                re = 1;
-            }
             if let Some(v) = hmc.get(&cs) {
-                let x1 = match v.binary_search(&rs) {
-                    Ok(vv) => vv,
-                    Err(vv) => vv,
-                };
-                let x2 = match v.binary_search(&re) {
-                    Ok(vv) => vv,
-                    Err(vv) => vv,
-                };
-                if x1 != x2 {
-                    re = re.max(v[x1.min(v.len() - 1)] + 1);
+                let j = v.binary_search(&rs).unwrap_err();
+                match j {
+                    0 => re = (re - l).max(1),
+                    _ if j == v.len() => re = (re - l).max(v[j - 1] + 1),
+                    _ => re = (re - l).max(v[j] + 1),
                 }
+            } else {
+                re = (re - l).max(1);
             }
         } else {
-            if rs + l <= h {
-                re += l;
-            } else {
-                re = h;
-            }
             if let Some(v) = hmc.get(&cs) {
-                let x1 = match v.binary_search(&rs) {
-                    Ok(vv) => vv,
-                    Err(vv) => vv,
-                };
-                let x2 = match v.binary_search(&re) {
-                    Ok(vv) => vv,
-                    Err(vv) => vv,
-                };
-                if x1 != x2 {
-                    re = re.min(v[x1.min(v.len() - 1)] - 1);
+                let j = v.binary_search(&rs).unwrap_err();
+                match j {
+                    _ if j == v.len() => re = (re + l).min(h),
+                    _ => re = (re + l).min(v[j + 1] - 1),
                 }
+            } else {
+                re = (re + l).min(h);
             }
         }
         println!("{} {}", re, ce);
