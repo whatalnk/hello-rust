@@ -3,32 +3,37 @@ use proconio::input;
 fn main() {
     input! {
         n: usize,
-        x: i64,
-        y: i64,
-        a: [i64; n]
+        x: isize,
+        y: isize,
+        a: [isize; n]
     }
-    let m = 10000;
-    let mut dp1 = vec![false; 2 * m + 1];
-    let mut dp2 = vec![false; 2 * m + 1];
-    let mut dp3 = vec![0; 2 * m + 1];
-    dp1[a[0]] = true;
-    dp2[0] = true;
+    let m = 10000isize;
+    let mut dp1 = vec![false; 2 * (m as usize) + 1];
+    let mut dp2 = vec![false; 2 * (m as usize) + 1];
+    dp1[(m + a[0]) as usize] = true;
+    dp2[m as usize] = true;
     for i in 1..n {
+        let mut dp3 = vec![false; 2 * (m as usize) + 1];
         let aa = a[i];
         if i % 2 == 0 {
-            for j in -m..=(m - a) {
-                dp3[j + a] |= dp1[j];
-                dp3[j] |= dp1[j + a];
+            for j in -m..=(m - aa) {
+                dp3[(m + j + aa) as usize] |= dp1[(m + j) as usize];
+                dp3[(m + j) as usize] |= dp1[(m + j + aa) as usize];
             }
-        // ???
-        // swap(dp1, dp3);
+            dp1 = dp3.to_vec();
         } else {
-            for j in -m..=(m - a) {
-                dp3[j + a] |= dp2[j];
-                dp3[j] |= dp2[j + a];
+            for j in -m..=(m - aa) {
+                dp3[(m + j + aa) as usize] |= dp2[(m + j) as usize];
+                dp3[(m + j) as usize] |= dp2[(m + j + aa) as usize];
             }
-            // ???
-            // swap[dp2, dp3];
+            dp2 = dp3.to_vec();
         }
+    }
+    // println!("{:?}", dp1);
+    // println!("{:?}", dp2);
+    if dp1[(m + x) as usize] && dp2[(m + y) as usize] {
+        println!("Yes");
+    } else {
+        println!("No");
     }
 }
