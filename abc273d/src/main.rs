@@ -29,11 +29,13 @@ fn main() {
         }
         e.insert(c);
     }
+
     let mut hmc = HashMap::<&usize, Vec<&usize>>::new();
     let mut hmr = HashMap::<&usize, Vec<&usize>>::new();
     for (k, v) in &hmc_ {
         hmc.insert(k, v.iter().collect());
     }
+
     for (k, v) in &hmr_ {
         hmr.insert(k, v.iter().collect());
     }
@@ -44,44 +46,32 @@ fn main() {
         if d == 'L' {
             if let Some(v) = hmr.get(&rs) {
                 let j = v.binary_search(&&cs).unwrap_err();
-                if v[j - 1] + l > cs {
-                    ce = v[j - 1] + 1;
-                } else {
-                    ce = ce - l;
-                }
+                ce = (ce as isize - l as isize).max(1) as usize;
+                ce = ce.max(v[j - 1] + 1);
             } else {
                 ce = (ce as isize - l as isize).max(1) as usize;
             }
         } else if d == 'R' {
             if let Some(v) = hmr.get(&rs) {
                 let j = v.binary_search(&&cs).unwrap_err();
-                if v[j] < &(cs + l) {
-                    ce = v[j] - 1;
-                } else {
-                    ce = ce + l;
-                }
+                ce = (ce + l).min(w);
+                ce = ce.min(v[j] - 1);
             } else {
                 ce = (ce as isize + l as isize).min(w as isize) as usize;
             }
         } else if d == 'U' {
-            if let Some(v) = hmr.get(&cs) {
+            if let Some(v) = hmc.get(&cs) {
                 let j = v.binary_search(&&rs).unwrap_err();
-                if v[j - 1] + l > rs {
-                    re = v[j - 1] + 1;
-                } else {
-                    re = re - l;
-                }
+                re = (re as isize - l as isize).max(1) as usize;
+                re = re.max(v[j - 1] + 1);
             } else {
                 re = (re as isize - l as isize).max(1) as usize;
             }
         } else {
-            if let Some(v) = hmr.get(&cs) {
+            if let Some(v) = hmc.get(&cs) {
                 let j = v.binary_search(&&rs).unwrap_err();
-                if v[j] < &(rs + l) {
-                    re = v[j] - 1;
-                } else {
-                    re = re + l;
-                }
+                re = (re + l).min(h);
+                re = re.min(v[j] - 1);
             } else {
                 re = (re as isize + l as isize).min(h as isize) as usize;
             }
