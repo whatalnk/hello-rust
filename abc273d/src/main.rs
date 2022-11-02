@@ -1,5 +1,5 @@
 use proconio::input;
-use std::collections::{BinaryHeap, HashMap};
+use std::collections::{BTreeSet, HashMap};
 
 fn main() {
     input! {
@@ -12,22 +12,30 @@ fn main() {
         q: usize,
         dl: [(char, usize); q],
     }
-    let mut hmc_ = HashMap::new();
-    let mut hmr_ = HashMap::new();
+    let mut hmc_ = HashMap::<usize, BTreeSet<usize>>::new();
+    let mut hmr_ = HashMap::<usize, BTreeSet<usize>>::new();
     for i in 0..n {
         let (r, c) = rc[i];
-        let e = hmc_.entry(c).or_insert(BinaryHeap::new());
-        e.push(r);
-        let e = hmr_.entry(r).or_insert(BinaryHeap::new());
-        e.push(c);
+        let e = hmc_.entry(c).or_insert(BTreeSet::new());
+        if e.len() == 0 {
+            e.insert(0);
+            e.insert(h + 1);
+        }
+        e.insert(r);
+        let e = hmr_.entry(r).or_insert(BTreeSet::new());
+        if e.len() == 0 {
+            e.insert(0);
+            e.insert(w + 1);
+        }
+        e.insert(c);
     }
-    let mut hmc = HashMap::new();
-    let mut hmr = HashMap::new();
+    let mut hmc = HashMap::<&usize, Vec<&usize>>::new();
+    let mut hmr = HashMap::<&usize, Vec<&usize>>::new();
     for (k, v) in &hmc_ {
-        hmc.insert(k, v.clone().into_sorted_vec());
+        hmc.insert(k, v.iter().collect());
     }
     for (k, v) in &hmr_ {
-        hmr.insert(k, v.clone().into_sorted_vec());
+        hmr.insert(k, v.iter().collect());
     }
     for i in 0..q {
         let (d, l) = dl[i];
@@ -35,57 +43,47 @@ fn main() {
         let mut ce = cs;
         if d == 'L' {
             if let Some(v) = hmr.get(&rs) {
-                let j = v.binary_search(&cs).unwrap_err();
-                match j {
-                    0 if ce > l => ce = ce - l,
-                    0 => ce = 1,
-                    _ if j == v.len() => ce = (ce - l).max(v[j - 1] + 1),
-                    _ => ce = (ce - l).max(v[j] + 1),
+                let j = v.binary_search(&&cs).unwrap_err();
+                if v[j - 1] + l > cs {
+                    ce = v[j - 1] + 1;
+                } else {
+                    ce = ce - l;
                 }
             } else {
-                if ce > l {
-                    ce = ce - l;
-                } else {
-                    ce = 1;
-                }
+                ce = (ce as isize - l as isize).max(1) as usize;
             }
         } else if d == 'R' {
             if let Some(v) = hmr.get(&rs) {
-                let j = v.binary_search(&cs).unwrap_err();
-                match j {
-                    0 => ce = (ce + l).min(v[j] - 1),
-                    _ if j == v.len() => ce = (ce + l).min(w),
-                    _ => ce = (ce + l).min(v[j + 1] - 1),
+                let j = v.binary_search(&&cs).unwrap_err();
+                if v[j] < &(cs + l) {
+                    ce = v[j] - 1;
+                } else {
+                    ce = ce + l;
                 }
             } else {
-                ce = (ce + l).min(w);
+                ce = (ce as isize + l as isize).min(w as isize) as usize;
             }
         } else if d == 'U' {
-            if let Some(v) = hmc.get(&cs) {
-                let j = v.binary_search(&rs).unwrap_err();
-                match j {
-                    0 if re > l => re = re - l,
-                    0 => re = 1,
-                    _ if j == v.len() => re = (re - l).max(v[j - 1] + 1),
-                    _ => re = (re - l).max(v[j] + 1),
+            if let Some(v) = hmr.get(&cs) {
+                let j = v.binary_search(&&rs).unwrap_err();
+                if v[j - 1] + l > rs {
+                    re = v[j - 1] + 1;
+                } else {
+                    re = re - l;
                 }
             } else {
-                if re > l {
-                    re = re - l;
-                } else {
-                    re = 1;
-                }
+                re = (re as isize - l as isize).max(1) as usize;
             }
         } else {
-            if let Some(v) = hmc.get(&cs) {
-                let j = v.binary_search(&rs).unwrap_err();
-                match j {
-                    0 => re = (re + l).min(v[j] - 1),
-                    _ if j == v.len() => re = (re + l).min(h),
-                    _ => re = (re + l).min(v[j + 1] - 1),
+            if let Some(v) = hmr.get(&cs) {
+                let j = v.binary_search(&&rs).unwrap_err();
+                if v[j] < &(rs + l) {
+                    re = v[j] - 1;
+                } else {
+                    re = re + l;
                 }
             } else {
-                re = (re + l).min(h);
+                re = (re as isize + l as isize).min(h as isize) as usize;
             }
         }
         println!("{} {}", re, ce);
