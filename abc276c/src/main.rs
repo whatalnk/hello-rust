@@ -1,5 +1,6 @@
 use proconio::input;
 use std::collections::BTreeSet;
+use std::ops::Bound::{Excluded, Included};
 
 fn main() {
     input! {
@@ -13,12 +14,17 @@ fn main() {
         if p[n - i - 1] > p[n - i - 2] {
             bts.insert(p[n - i - 2]);
         } else {
+            let prev = bts
+                .range((Included(&0), Excluded(&p[n - i - 2])))
+                .max()
+                .unwrap()
+                .clone();
             bts.insert(p[n - i - 2]);
-            bts.remove(&(p[n - i - 2] - 1));
+            bts.remove(&prev);
             for j in 0..(n - i - 2) {
                 ans.push(p[j]);
             }
-            ans.push(p[n - i - 2] - 1);
+            ans.push(prev);
             break;
         }
     }
