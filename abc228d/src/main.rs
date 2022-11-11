@@ -34,12 +34,12 @@ fn main() {
     for i in 0..q {
         let (t, x) = tx[i];
         if t == 1 {
-            let j = uf.find(x & mask);
-            let k = uf.find((j + 1) & mask);
+            let j = uf.find(x % n);
+            let k = uf.find((j + 1) % n);
             v[j] = x as i64;
             uf.update_par(j, k);
         } else {
-            println!("{}", v[x & mask]);
+            println!("{}", v[x % n]);
         }
     }
 }
