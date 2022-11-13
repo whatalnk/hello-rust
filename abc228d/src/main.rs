@@ -28,7 +28,6 @@ fn main() {
         tx: [(i64, usize); q],
     }
     let n: usize = 1 << 20;
-    let mask = n - 1;
     let mut v: Vec<i64> = vec![-1; n];
     let mut uf = ModUnionFind::new(n);
     for i in 0..q {
