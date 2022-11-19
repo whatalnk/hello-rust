@@ -1,5 +1,5 @@
 use proconio::input;
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
 fn main() {
     input! {
@@ -7,7 +7,7 @@ fn main() {
         m: i64,
         a: [i64; n],
     }
-    let mut hm = HashMap::new();
+    let mut hm = BTreeMap::new();
     let mut asum = 0;
     for i in 0..n {
         let e = hm.entry(a[i]).or_insert(0);
