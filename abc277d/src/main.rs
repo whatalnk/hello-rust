@@ -25,14 +25,14 @@ fn main() {
     }
     let mut p = 0;
     for i in 0..k {
-        if v[(i + 1) % (k as usize)].0 != (v[i].0 + 1) % m {
+        if v[(i + 1) % k].0 != (v[i].0 + 1) % m {
             p = i as i64;
             break;
         }
     }
     let mut s = vec![0; 200005];
     for i in 0..k {
-        let j = (p as usize - i + k) % k;
+        let j = (p as usize + k - i) % k;
         s[j] = asum;
         if v[(j + 1) % k].0 == (v[j].0 + 1) % m {
             s[j] = s[(j + 1) % k];
