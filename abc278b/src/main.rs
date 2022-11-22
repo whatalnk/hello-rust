@@ -5,18 +5,20 @@ fn main() {
         h: i64,
         m: i64
     }
-    let h1 = h / 10;
-    let h2 = h % 10;
-    let m1 = m / 10;
-    let m2 = m % 10;
-    println!("{} {}: {} {}", h1, h2, m1, m2);
-    for dh in 0..24 {
-        for dm in 0..60 {
-            let hh1 = ((h + dh) % 24) / 10;
-            let hh2 = ((h + dh) % 24) % 10;
-            let mm1 = ((m + dm) % 60) / 10;
-            let mm2 = ((m + dm) % 60) % 10;
-            println!("{}{}: {}{}", hh1, hh2, mm1, mm2);
+    let dmax = 24 * 60;
+    for d in 0..dmax {
+        let md = m + d;
+        let hh = (h + md / 60) % 24;
+        let mm = md % 60;
+        let a = hh / 10;
+        let b = hh % 10;
+        let c = mm / 10;
+        let d = mm % 10;
+        let ac = a * 10 + c;
+        let bd = b * 10 + d;
+        if ac >= 0 && ac < 24 && bd >= 0 && bd < 60 {
+            println!("{:02} {:02}", hh, mm);
+            return;
         }
     }
 }
