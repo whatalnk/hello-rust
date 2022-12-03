@@ -8,4 +8,4 @@ cli_test_dir = "*"
 
 [dependencies]
 proconio = { version = "=0.3.6", features = ["derive"] }
-
+num = {version = "=0.2.1"}
