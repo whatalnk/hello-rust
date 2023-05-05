@@ -17,9 +17,9 @@ fn main() {
         bb[i + 1] = bb[i] + b[i];
     }
     let mut ans = 0;
-    for i in 0..(n + 1) {
-        if aa[i] <= k {
-            let v = match bb.binary_search(&(k - aa[i])) {
+    for (i, item) in aa.iter().enumerate() {
+        if item <= &k {
+            let v = match bb.binary_search(&(k - item)) {
                 Ok(x) => x,
                 Err(x) => x - 1,
             };
