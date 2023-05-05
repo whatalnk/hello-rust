@@ -1,3 +1,5 @@
+#![allow(clippy::many_single_char_names)]
+
 use proconio::input;
 use std::cell::RefCell;
 
@@ -10,7 +12,7 @@ struct S {
 impl S {
     fn dfs(&self, a: i64, v: Vec<i64>) {
         if v.len() == self.n {
-            self.aa.borrow_mut().push(v.clone());
+            self.aa.borrow_mut().push(v);
             return;
         }
         for i in a..=self.m {
@@ -30,8 +32,8 @@ fn main() {
     }
     let aa = Vec::<Vec<i64>>::new();
     let s = S {
-        n: n,
-        m: m,
+        n,
+        m,
         aa: RefCell::new(aa),
     };
     s.dfs(1, vec![]);
@@ -40,9 +42,9 @@ fn main() {
     for i in 0..n {
         let ary = &s.aa.borrow()[i];
         let mut ans_ = 0;
-        for j in 0..q {
-            let (a, b, c, d) = abcd[j];
-            if ary[b - 1] - ary[a - 1] == c {
+        for elem in abcd.iter() {
+            let (a, b, c, d) = elem;
+            if ary[b - 1] - ary[a - 1] == *c {
                 ans_ += d;
             }
         }
