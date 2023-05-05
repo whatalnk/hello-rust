@@ -1,7 +1,7 @@
 use proconio::input;
 
 fn bit(x: i64, i: i64) -> i64 {
-    return (x >> i) & 1;
+    (x >> i) & 1
 }
 
 #[allow(unused_assignments)]
@@ -19,18 +19,18 @@ fn main() {
             let mut f = Vec::<i64>::new();
             let x = bit(ta[i].1, k);
             if ta[i].0 == 1 {
-                f = vec![0 & x, 1 & x];
+                f = vec![0, 1 & x];
             } else if ta[i].0 == 2 {
-                f = vec![0 | x, 1 | x];
+                f = vec![x, 1 | x];
             } else {
-                f = vec![0 ^ x, 1 ^ x];
+                f = vec![x, 1 ^ x];
             }
             func = vec![f[func[0] as usize], f[func[1] as usize]];
             crr = func[crr as usize];
             ans[i] |= crr << k;
         }
     }
-    for i in 0..n {
-        println!("{}", ans[i]);
+    for ai in ans.iter() {
+        println!("{}", ai);
     }
 }
