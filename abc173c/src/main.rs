@@ -27,12 +27,12 @@ fn main() {
             let mut m = vec![vec![true; w]; h];
             for ii in i {
                 for jj in 0..w {
-                    m[ii.clone()][jj] = false;
+                    m[*ii][jj] = false;
                 }
             }
             for jj in j {
-                for ii in 0..h {
-                    m[ii][jj.clone()] = false;
+                for row in m.iter_mut() {
+                    row[*jj] = false;
                 }
             }
             let mut cnt = 0;
