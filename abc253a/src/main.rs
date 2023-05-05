@@ -6,9 +6,7 @@ fn main() {
         b: i32,
         c: i32
     }
-    if b >= a && b <= c {
-        println!("Yes");
-    } else if b >= c && b <= a {
+    if (b >= a && b <= c) || (b >= c && b <= a) {
         println!("Yes");
     } else {
         println!("No");
