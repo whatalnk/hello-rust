@@ -7,11 +7,11 @@ fn main() {
         mut a: [i64; n]
     }
     let mut hm = HashMap::new();
-    for i in 0..n {
-        let e = hm.entry(a[i]).or_insert(0);
+    for ai in a.iter() {
+        let e = hm.entry(ai).or_insert(0);
         *e += 1;
     }
-    let ks: Vec<&i64> = hm.keys().into_iter().collect();
+    let ks: Vec<&i64> = hm.keys().cloned().collect();
     let l = ks.len();
     let mut ans = 0;
     for i in 0..l {
