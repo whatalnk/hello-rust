@@ -6,7 +6,7 @@ fn f(mut n: i128) -> u32 {
         ans += 1;
         n /= 10;
     }
-    return ans;
+    ans
 }
 
 fn main() {
