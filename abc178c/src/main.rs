@@ -1,12 +1,12 @@
 use proconio::input;
 
-const MD: i64 = 1000000007;
+const MD: i64 = 1_000_000_007;
 fn powmod(x: i64, y: usize) -> i64 {
     let mut res = 1;
     for _ in 0..y {
         res = res * x % MD;
     }
-    return res;
+    res
 }
 
 fn main() {
