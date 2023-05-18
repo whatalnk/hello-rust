@@ -8,11 +8,11 @@ fn main() {
     }
     let mut n_must = HashSet::new();
     let mut n_all = vec![];
-    for i in 0..10 {
-        if d[i] == 'o' {
+    for (i, item) in d.iter().enumerate().take(10) {
+        if item == &'o' {
             n_must.insert(i);
             n_all.push(i);
-        } else if d[i] == '?' {
+        } else if item == &'?' {
             n_all.push(i);
         }
     }
