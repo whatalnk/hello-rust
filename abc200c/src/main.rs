@@ -7,12 +7,12 @@ fn main() {
         a: [i64; n],
     }
     let mut hm = HashMap::new();
-    for i in 0..n {
-        let e = hm.entry(a[i] % 200).or_insert(vec![]);
+    for (i, item) in a.iter().enumerate() {
+        let e = hm.entry(item % 200).or_insert_with(|| vec![]);
         e.push(i);
     }
     let mut ans = 0;
-    for (_, v) in &hm {
+    for v in hm.values() {
         ans += v.len() * (v.len() - 1) / 2;
     }
     println!("{}", ans);
