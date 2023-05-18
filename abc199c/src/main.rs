@@ -10,18 +10,18 @@ fn main() {
     }
     let mut v: Vec<usize> = (0..(2 * n)).collect();
     let mut flipped = false;
-    for i in 0..q {
-        let (t, a, b) = tab[i];
-        if t == 1 {
+    for item in tab.iter() {
+        let (t, a, b) = item;
+        if t == &1 {
             if flipped {
                 let a_: usize;
                 let b_: usize;
-                if a > n {
+                if a > &n {
                     a_ = a - n;
                 } else {
                     a_ = a + n;
                 }
-                if b > n {
+                if b > &n {
                     b_ = b - n;
                 } else {
                     b_ = b + n;
@@ -30,12 +30,10 @@ fn main() {
             } else {
                 v.swap(a - 1, b - 1);
             }
+        } else if flipped {
+            flipped = false;
         } else {
-            if flipped {
-                flipped = false;
-            } else {
-                flipped = true;
-            }
+            flipped = true;
         }
     }
     let left: String = v[0..n].iter().map(|i| s[*i]).collect();
