@@ -6,15 +6,15 @@ fn main() {
         c: [(usize, i64, i64); n]
     }
     let mut cc = vec![];
-    for i in 0..n {
-        if c[i].0 == 1 {
-            cc.push((c[i].1 * 10, c[i].2 * 10));
-        } else if c[i].0 == 2 {
-            cc.push((c[i].1 * 10, c[i].2 * 10 - 1));
-        } else if c[i].0 == 3 {
-            cc.push((c[i].1 * 10 + 1, c[i].2 * 10));
+    for item in c.iter() {
+        if item.0 == 1 {
+            cc.push((item.1 * 10, item.2 * 10));
+        } else if item.0 == 2 {
+            cc.push((item.1 * 10, item.2 * 10 - 1));
+        } else if item.0 == 3 {
+            cc.push((item.1 * 10 + 1, item.2 * 10));
         } else {
-            cc.push((c[i].1 * 10 + 1, c[i].2 * 10 - 1));
+            cc.push((item.1 * 10 + 1, item.2 * 10 - 1));
         }
     }
     let mut ans = 0;
