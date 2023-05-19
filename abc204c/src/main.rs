@@ -18,7 +18,7 @@ fn main() {
         ans += 1;
         let mut que = VecDeque::new();
         que.push_back(i);
-        while que.len() > 0 {
+        while !que.is_empty() {
             let cur = que.pop_front().unwrap();
             for j in &g[cur] {
                 if visited[*j] == 0 {
