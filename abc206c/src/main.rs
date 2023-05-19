@@ -12,7 +12,7 @@ fn main() {
         *e += 1;
     }
     let mut ans = (n * (n - 1) / 2) as i64;
-    for (_, v) in &hm {
+    for v in hm.values() {
         ans -= v * (v - 1) / 2;
     }
     println!("{}", ans);
