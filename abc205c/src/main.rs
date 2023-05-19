@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 use proconio::input;
 
 fn main() {
@@ -7,32 +9,22 @@ fn main() {
         c: i64
     }
     if c % 2 == 0 {
-        if a.abs() < b.abs() {
-            println!("<");
-        } else if a.abs() == b.abs() {
-            println!("=");
-        } else {
-            println!(">");
+        match a.abs().cmp(&b.abs()) {
+            Ordering::Less => {
+                println!("<");
+            }
+            Ordering::Equal => {
+                println!("=");
+            }
+            Ordering::Greater => {
+                println!(">");
+            }
         }
+    } else if a == b {
+        println!("=");
+    } else if (a >= 0 && a < b) || (a < 0 && (b >= 0 || a > b)) {
+        println!("<");
     } else {
-        if a == b {
-            println!("=");
-        } else if a >= 0 && b >= 0 {
-            if a < b {
-                println!("<");
-            } else {
-                println!(">");
-            }
-        } else if a >= 0 && b < 0 {
-            println!(">");
-        } else if a < 0 && b >= 0 {
-            println!("<");
-        } else {
-            if a > b {
-                println!("<");
-            } else {
-                println!(">");
-            }
-        }
+        println!(">");
     }
 }
