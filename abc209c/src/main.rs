@@ -8,8 +8,8 @@ fn main() {
     c.sort();
     let m: i128 = 1_000_000_000 + 7;
     let mut ans: i128 = 1;
-    for i in 0..n {
-        ans *= c[i] - i as i128;
+    for (i, item) in c.iter().enumerate() {
+        ans *= item - i as i128;
         ans %= m;
     }
     println!("{}", ans);
