@@ -8,8 +8,8 @@ fn main() {
         c: [i64; n]
     }
     let mut hs = HashMap::<i64, i64>::new();
-    for i in 0..k {
-        let e = hs.entry(c[i]).or_insert(0);
+    for item in c.iter().take(k) {
+        let e = hs.entry(*item).or_insert(0);
         *e += 1;
     }
     let mut ans = hs.len();
