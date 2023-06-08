@@ -31,8 +31,8 @@ fn main() {
     let n = s.len();
     let v = Vec::<String>::new();
     let mut mystruct = MyStruct {
-        n: n,
-        s: s,
+        n,
+        s,
         v: RefCell::new(v),
     };
     mystruct.f(0, "".to_string());
