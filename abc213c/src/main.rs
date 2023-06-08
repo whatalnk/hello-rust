@@ -11,9 +11,9 @@ fn main() {
     }
     let mut sa = HashSet::new();
     let mut sb = HashSet::new();
-    for i in 0..n {
-        sa.insert(ab[i].0);
-        sb.insert(ab[i].1);
+    for item in ab.iter() {
+        sa.insert(item.0);
+        sb.insert(item.1);
     }
     let mut a: Vec<_> = sa.iter().collect();
     let mut b: Vec<_> = sb.iter().collect();
@@ -21,17 +21,13 @@ fn main() {
     b.sort();
     let mut ai = HashMap::new();
     let mut bi = HashMap::new();
-    for i in 0..a.len() {
-        ai.insert(*a[i], i + 1);
+    for (i, item) in a.iter().enumerate() {
+        ai.insert(*item, i + 1);
     }
-    for i in 0..b.len() {
-        bi.insert(*b[i], i + 1);
+    for (i, item) in b.iter().enumerate() {
+        bi.insert(*item, i + 1);
     }
-    for i in 0..n {
-        println!(
-            "{} {}",
-            ai.get(&ab[i].0).unwrap(),
-            bi.get(&ab[i].1).unwrap()
-        );
+    for item in ab.iter() {
+        println!("{} {}", ai.get(&item.0).unwrap(), bi.get(&item.1).unwrap());
     }
 }
