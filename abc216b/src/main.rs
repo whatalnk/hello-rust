@@ -8,7 +8,7 @@ fn main() {
     }
     let mut h = HashMap::<String, HashMap<String, i32>>::new();
     for (s, t) in st {
-        let v = h.entry(s).or_insert(HashMap::new());
+        let v = h.entry(s).or_insert_with(HashMap::new);
         let vv = v.entry(t).or_insert(0);
         *vv += 1;
         if *vv == 2 {
