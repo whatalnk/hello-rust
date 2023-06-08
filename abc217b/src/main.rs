@@ -7,7 +7,7 @@ fn main() {
     }
     let mut set = HashSet::<String>::new();
     for x in &["ABC", "ARC", "AGC", "AHC"] {
-        set.insert(x.to_string());
+        set.insert((*x).to_string());
     }
     for x in &s {
         set.remove(x);
