@@ -6,7 +6,7 @@ fn base10(s: String, base: u64) -> u64 {
         ret *= base;
         ret += x.to_string().parse::<u64>().unwrap();
     }
-    return ret;
+    ret
 }
 
 fn main() {
