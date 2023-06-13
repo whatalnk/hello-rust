@@ -1,5 +1,6 @@
 use proconio::input;
 use proconio::marker::Chars;
+use std::cmp::Ordering;
 
 #[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
 struct Person {
@@ -8,12 +9,11 @@ struct Person {
 }
 
 fn gcp(h1: char, h2: char) -> i32 {
-    let res = match (h1, h2) {
+    match (h1, h2) {
         ('G', 'C') | ('C', 'P') | ('P', 'G') => 1,
         ('G', 'G') | ('C', 'C') | ('P', 'P') => 0,
         _ => -1,
-    };
-    return res;
+    }
 }
 
 fn main() {
@@ -32,15 +32,15 @@ fn main() {
             let p2 = &persons[2 * k + 1];
             let h1 = a[p1.no][i];
             let h2 = a[p2.no][i];
-            if gcp(h1, h2) > 0 {
-                persons[2 * k].win -= 1;
-            } else if gcp(h1, h2) < 0 {
-                persons[2 * k + 1].win -= 1
+            match gcp(h1, h2).cmp(&0) {
+                Ordering::Greater => persons[2 * k].win -= 1,
+                Ordering::Less => persons[2 * k + 1].win -= 1,
+                Ordering::Equal => {}
             }
         }
         persons.sort();
     }
-    for i in 0..(2 * n) {
-        println!("{}", persons[i].no + 1);
+    for pi in persons.iter().take(2 * n) {
+        println!("{}", pi.no + 1);
     }
 }
