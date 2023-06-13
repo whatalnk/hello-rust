@@ -10,9 +10,9 @@ fn main() {
     let mut ans = x / sum_a;
     let mut cur = ans * sum_a;
     ans *= n as i128;
-    for i in 0..n {
-        if cur + a[i] <= x {
-            cur += a[i];
+    for ai in a.iter().take(n) {
+        if cur + ai <= x {
+            cur += ai;
             ans += 1;
         } else {
             break;
