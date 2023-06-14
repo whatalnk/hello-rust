@@ -5,7 +5,7 @@ fn main() {
        n: usize,
        s: [usize; n]
     }
-    let mut v = vec![0; 10000000];
+    let mut v = vec![0; 10_000_000];
     for i in 1..=250 {
         for j in 1..=250 {
             let ss = 4 * i * j + 3 * i + 3 * j;
