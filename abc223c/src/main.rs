@@ -7,13 +7,13 @@ fn main() {
     }
     let mut t = 0.0;
     let mut ans = 0.0;
-    for i in 0..n {
-        t += ab[i].0 / ab[i].1;
+    for abi in ab.iter().take(n) {
+        t += abi.0 / abi.1;
     }
     t /= 2.0;
-    for i in 0..n {
-        ans += (ab[i].0).min(t * ab[i].1);
-        t -= (ab[i].0 / ab[i].1).min(t);
+    for abi in ab.iter().take(n) {
+        ans += (abi.0).min(t * abi.1);
+        t -= (abi.0 / abi.1).min(t);
     }
     println!("{}", ans);
 }
