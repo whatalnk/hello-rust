@@ -20,7 +20,7 @@ fn main() {
     let mut q = vec![];
     hs.insert(n);
     q.push(n);
-    while q.len() > 0 {
+    while !q.is_empty() {
         let i = q.pop().unwrap();
         for a in &aa[i - 1] {
             if !hs.contains(a) {
