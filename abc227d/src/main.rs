@@ -7,12 +7,12 @@ fn main() {
         a: [i128; n],
     }
     let mut ok = 0i128;
-    let mut ng = 1000000000000000000 / k;
+    let mut ng = 1_000_000_000_000_000_000 / k;
     while ng - ok > 1 {
         let md = (ok + ng) / 2;
         let mut sum = 0;
-        for i in 0..n {
-            sum += a[i].min(md);
+        for ai in a.iter().take(n) {
+            sum += ai.min(&md);
         }
         if sum >= k * md {
             ok = md;
