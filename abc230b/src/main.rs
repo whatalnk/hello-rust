@@ -10,7 +10,7 @@ fn main() {
     }
     let tt = t.as_str();
     let n = s.len();
-    if s == &tt[0..n] || s == &tt[1..n + 1] || s == &tt[2..n + 2] {
+    if s == tt[0..n] || s == tt[1..n + 1] || s == tt[2..n + 2] {
         println!("Yes");
     } else {
         println!("No");
