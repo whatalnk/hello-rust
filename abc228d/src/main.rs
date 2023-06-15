@@ -1,3 +1,5 @@
+#![allow(clippy::many_single_char_names)]
+
 use proconio::input;
 
 struct ModUnionFind {
@@ -11,10 +13,10 @@ impl ModUnionFind {
     }
     fn find(&mut self, x: usize) -> usize {
         if self.par[x] == x {
-            return x;
+            x
         } else {
             self.par[x] = self.find(self.par[x]);
-            return self.par[x];
+            self.par[x]
         }
     }
     fn update_par(&mut self, x: usize, y: usize) {
@@ -30,12 +32,12 @@ fn main() {
     let n: usize = 1 << 20;
     let mut v: Vec<i64> = vec![-1; n];
     let mut uf = ModUnionFind::new(n);
-    for i in 0..q {
-        let (t, x) = tx[i];
-        if t == 1 {
+    for txi in tx.iter().take(q) {
+        let (t, x) = txi;
+        if t == &1 {
             let j = uf.find(x % n);
             let k = uf.find((j + 1) % n);
-            v[j] = x as i64;
+            v[j] = *x as i64;
             uf.update_par(j, k);
         } else {
             println!("{}", v[x % n]);
