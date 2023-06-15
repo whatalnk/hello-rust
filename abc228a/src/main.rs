@@ -12,11 +12,9 @@ fn main() {
         } else {
             println!("No");
         }
+    } else if x < t || x >= s {
+        println!("Yes");
     } else {
-        if x < t || x >= s {
-            println!("Yes");
-        } else {
-            println!("No");
-        }
+        println!("No");
     }
 }
