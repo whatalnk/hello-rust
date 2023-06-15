@@ -30,7 +30,7 @@ fn main() {
             }
         }
     }
-    for i in 0..h {
-        println!("{}", m[i].iter().collect::<String>());
+    for mi in m.iter().take(h) {
+        println!("{}", mi.iter().collect::<String>());
     }
 }
