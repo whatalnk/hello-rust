@@ -17,8 +17,8 @@ fn main() {
     let mut ans = 0;
     let mut r = 0;
     for l in 0..n {
-        while r <= n - 1 && cnt[r + 1] - cnt[l] <= k {
-            r = r + 1;
+        while r < n && cnt[r + 1] - cnt[l] <= k {
+            r += 1;
         }
         ans = ans.max(r - l);
     }
