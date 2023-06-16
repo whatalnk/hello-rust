@@ -62,9 +62,9 @@ fn main() {
         cd.push((c, d))
     }
     let s = S {
-        n: n,
-        g: g,
-        cd: cd,
+        n,
+        g,
+        cd,
         ans: Cell::new(false),
     };
     s.f(vec![]);
