@@ -35,8 +35,8 @@ fn main() {
         aa.push(a);
     }
     let s = S {
-        n: n,
-        aa: aa,
+        n,
+        aa,
         ans: Cell::new(0),
     };
     s.f(0, x);
