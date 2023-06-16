@@ -6,9 +6,9 @@ fn main() {
         h: [usize; n]
     }
     let mut x = h[0];
-    for i in 1..n {
-        if h[i] > x {
-            x = h[i];
+    for hi in h.iter().take(n).skip(1) {
+        if hi > &x {
+            x = *hi;
         } else {
             println!("{}", x);
             return;
