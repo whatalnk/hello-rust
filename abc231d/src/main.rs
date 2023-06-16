@@ -13,10 +13,10 @@ impl UnionFind {
     }
     fn find(&mut self, x: usize) -> usize {
         if self.par[x] == x {
-            return x;
+            x
         } else {
             self.par[x] = self.find(self.par[x]);
-            return self.par[x];
+            self.par[x]
         }
     }
     fn unite(&mut self, mut x: usize, mut y: usize) {
@@ -35,7 +35,7 @@ impl UnionFind {
         }
     }
     fn same(&mut self, x: usize, y: usize) -> bool {
-        return self.find(x) == self.find(y);
+        self.find(x) == self.find(y)
     }
 }
 
@@ -47,8 +47,8 @@ fn main() {
     }
     let mut d = vec![0; n];
     let mut uf = UnionFind::new(n);
-    for i in 0..m {
-        let (mut a, mut b) = ab[i];
+    for abi in ab.iter().take(m) {
+        let (mut a, mut b) = abi;
         a -= 1;
         b -= 1;
         if uf.same(a, b) {
@@ -59,8 +59,8 @@ fn main() {
         d[a] += 1;
         d[b] += 1;
     }
-    for i in 0..n {
-        if d[i] > 2 {
+    for di in d.iter().take(n) {
+        if di > &2 {
             println!("No");
             return;
         }
