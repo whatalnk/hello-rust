@@ -10,15 +10,15 @@ fn main() {
     }
     let mut bts = BTreeSet::new();
     let mut vk: i64 = n as i64;
-    for i in 0..k {
-        vk = vk.min(p[i]);
-        bts.insert(p[i]);
+    for pi in p.iter().take(k) {
+        vk = vk.min(*pi);
+        bts.insert(*pi);
     }
     println!("{}", vk);
-    for i in k..n {
-        bts.insert(p[i]);
-        if vk < p[i] {
-            let mut it = bts.range((Included(&(vk + 1)), Included(&p[i])));
+    for pi in p.iter().take(n).skip(k) {
+        bts.insert(*pi);
+        if &vk < pi {
+            let mut it = bts.range((Included(&(vk + 1)), Included(pi)));
             vk = *it.next().unwrap();
         }
         println!("{}", vk);
