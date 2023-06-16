@@ -9,11 +9,11 @@ fn main() {
     lr.sort_by(|a, b| a.1.cmp(&b.1));
     let mut ans = 0;
     let mut x = -(1i64 << 40);
-    for i in 0..n {
-        let (l, r) = lr[i];
-        if x + d - 1 < l {
+    for lri in lr.iter().take(n) {
+        let (l, r) = lri;
+        if &(x + d - 1) < l {
             ans += 1;
-            x = r;
+            x = *r;
         }
     }
     println!("{}", ans);
