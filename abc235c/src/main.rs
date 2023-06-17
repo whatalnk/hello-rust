@@ -8,8 +8,8 @@ fn main() {
         a: [i64; n]
     }
     let mut hm = HashMap::new();
-    for i in 0..n {
-        let e = hm.entry(a[i]).or_insert(vec![]);
+    for (i, ai) in a.iter().enumerate().take(n) {
+        let e = hm.entry(ai).or_insert_with(|| vec![]);
         e.push(i + 1);
     }
     for _ in 0..q {
