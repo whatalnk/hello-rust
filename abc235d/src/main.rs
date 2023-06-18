@@ -1,3 +1,5 @@
+#![allow(clippy::many_single_char_names)]
+
 use proconio::input;
 use std::collections::VecDeque;
 
@@ -16,7 +18,7 @@ fn main() {
     d[1] = 0;
     q.push_back(1);
 
-    while q.len() > 0 {
+    while !q.is_empty() {
         let c = q.pop_front().unwrap();
         let dc = d[c];
 
