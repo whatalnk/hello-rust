@@ -8,8 +8,8 @@ fn main() {
     }
     for i in 0..w {
         let mut row = Vec::<String>::new();
-        for j in 0..h {
-            row.push(a[j][i].to_string());
+        for aj in a.iter().take(h) {
+            row.push(aj[i].to_string());
         }
         println!("{}", row.join(" "));
     }
