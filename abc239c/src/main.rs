@@ -17,7 +17,7 @@ fn main() {
         ps2.insert((x2 + dx[i], y2 + dy[i]));
     }
     let intersection: HashSet<_> = ps1.intersection(&ps2).collect();
-    if intersection.len() > 0 {
+    if !intersection.is_empty() {
         println!("Yes");
     } else {
         println!("No");
