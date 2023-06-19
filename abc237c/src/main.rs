@@ -14,8 +14,8 @@ fn main() {
     let mut ans = false;
     let n = s.len();
     let mut left = 0;
-    for i in 0..n {
-        if s[i] == 'a' {
+    for si in s.iter().take(n) {
+        if si == &'a' {
             left += 1;
         } else {
             break;
