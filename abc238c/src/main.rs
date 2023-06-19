@@ -1,7 +1,7 @@
 use proconio::input;
 
 fn main() {
-    let m = 998244353;
+    let m = 998_244_353;
     input! {
         n: i128
     }
