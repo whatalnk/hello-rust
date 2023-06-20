@@ -16,12 +16,12 @@ fn main() {
     }
     let mut ans = false;
     // よこ
-    for i in 0..n {
+    for si in s.iter().take(n) {
         for j in 0..n {
             if j + 5 <= n - 1 {
                 let mut rs = 0;
                 for d in 0..6 {
-                    rs += s[i][j + d];
+                    rs += si[j + d];
                 }
                 if rs >= 4 {
                     ans = true;
