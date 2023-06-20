@@ -12,11 +12,11 @@ fn main() {
     }
     let mut ans = 0;
     let mut v: Vec<S> = vec![];
-    for i in 0..n {
+    for ai in a.iter().take(n) {
         if let Some(x) = v.pop() {
-            if x.key == a[i] {
+            if x.key == *ai {
                 let mut cur = S {
-                    key: a[i],
+                    key: *ai,
                     cnt: x.cnt,
                 };
                 if cur.key == cur.cnt + 1 {
@@ -28,12 +28,12 @@ fn main() {
                 }
             } else {
                 v.push(x);
-                let cur = S { key: a[i], cnt: 1 };
+                let cur = S { key: *ai, cnt: 1 };
                 v.push(cur);
                 ans += 1;
             }
         } else {
-            let cur = S { key: a[i], cnt: 1 };
+            let cur = S { key: *ai, cnt: 1 };
             v.push(cur);
             ans += 1;
         }
