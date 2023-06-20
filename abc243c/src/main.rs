@@ -1,3 +1,5 @@
+#![allow(clippy::many_single_char_names)]
+
 use proconio::input;
 use proconio::marker::Chars;
 use std::collections::HashMap;
