@@ -11,10 +11,10 @@ fn main() {
     }
     let mut checked = vec![false; 2 * n + 2];
     loop {
-        for i in 1..=(2 * n + 1) {
-            if !checked[i] {
+        for (i, checkedi) in checked.iter_mut().enumerate().skip(1).take(2 * n + 1) {
+            if !*checkedi {
                 println!("{}", i);
-                checked[i] = true;
+                *checkedi = true;
                 break;
             }
         }
