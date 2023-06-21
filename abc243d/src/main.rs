@@ -17,10 +17,10 @@ fn main() {
         x /= 2;
     }
     xb.reverse();
-    for i in 0..n {
-        if s[i] == 'U' {
+    for si in s.iter().take(n) {
+        if si == &'U' {
             xb.pop();
-        } else if s[i] == 'L' {
+        } else if si == &'L' {
             xb.push('0');
         } else {
             // R
@@ -30,8 +30,8 @@ fn main() {
     xb.reverse();
     let mut ans: i64 = 0;
     let mut a: i64 = 1;
-    for i in 0..xb.len() {
-        if xb[i] == '1' {
+    for xbi in &xb {
+        if xbi == &'1' {
             ans += a;
         }
         a *= 2;
