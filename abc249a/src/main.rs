@@ -1,4 +1,5 @@
 use proconio::input;
+use std::cmp::Ordering;
 
 fn main() {
     input! {
@@ -52,11 +53,15 @@ fn main() {
         ans1 += tak[i];
         ans2 += aok[i];
     }
-    if ans1 > ans2 {
-        println!("Takahashi");
-    } else if ans1 == ans2 {
-        println!("Draw");
-    } else {
-        println!("Aoki");
+    match ans1.cmp(&ans2) {
+        Ordering::Greater => {
+            println!("Takahashi");
+        }
+        Ordering::Equal => {
+            println!("Draw");
+        }
+        Ordering::Less => {
+            println!("Aoki");
+        }
     }
 }
