@@ -4,7 +4,7 @@ fn main() {
     input! {
         n: usize,
     }
-    let max_n = 1000001;
+    let max_n = 1_000_001;
     let mut p = vec![true; max_n];
     p[0] = false;
     p[1] = false;
