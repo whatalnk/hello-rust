@@ -5,7 +5,7 @@ fn main() {
         n: usize,
         a: [i64; n]
     }
-    let n_max = 200000;
+    let n_max = 200_000;
     let mut cnt = vec![0; n_max + 1];
     for i in 0..n {
         cnt[a[i] as usize] += 1;
