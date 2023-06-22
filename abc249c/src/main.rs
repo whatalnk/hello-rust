@@ -8,7 +8,7 @@ fn main() {
         s: [Chars; n]
     }
     let mut ans = 0;
-    let a = 'a' as u8;
+    let a = b'a';
     for i in 0..(1 << n) {
         let mut sum = vec![0; 26];
         for j in 0..n {
@@ -19,8 +19,8 @@ fn main() {
             }
         }
         let mut now = 0;
-        for j in 0..26 {
-            if sum[j] == k {
+        for sumj in sum.iter().take(26) {
+            if sumj == &k {
                 now += 1;
             }
         }
