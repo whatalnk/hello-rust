@@ -1,7 +1,7 @@
 use proconio::input;
 
 fn main() {
-    let md = 998244353;
+    let md = 998_244_353;
     input! {
         n: usize,
         m: usize,
