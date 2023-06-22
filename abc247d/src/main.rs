@@ -1,3 +1,4 @@
+use std::cmp::Ordering;
 use std::collections::VecDeque;
 use text_io::read;
 
@@ -18,17 +19,21 @@ fn main() {
             while c > 0 {
                 let cc = vc.pop_front().unwrap();
                 let xx = vx.pop_front().unwrap();
-                if cc > c {
-                    s += xx * c;
-                    vc.push_front(cc - c);
-                    vx.push_front(xx);
-                    c = 0;
-                } else if cc == c {
-                    s += xx * c;
-                    c = 0;
-                } else {
-                    s += xx * cc;
-                    c -= cc;
+                match cc.cmp(&c) {
+                    Ordering::Greater => {
+                        s += xx * c;
+                        vc.push_front(cc - c);
+                        vx.push_front(xx);
+                        c = 0;
+                    }
+                    Ordering::Equal => {
+                        s += xx * c;
+                        c = 0;
+                    }
+                    Ordering::Less => {
+                        s += xx * cc;
+                        c -= cc;
+                    }
                 }
             }
             println!("{}", s)
