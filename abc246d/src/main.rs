@@ -1,14 +1,14 @@
 use proconio::input;
 
 fn f(a: i64, b: i64) -> i64 {
-    return a * a * a + a * a * b + a * b * b + b * b * b;
+    a * a * a + a * a * b + a * b * b + b * b * b
 }
 
 fn main() {
     input! {
         n: i64
     }
-    let a_max = 1000000;
+    let a_max = 1_000_000;
     let mut ans: i64 = 1_000_000_000_000_000_000;
     for i in 0..=a_max {
         let mut left = -1;
