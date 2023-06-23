@@ -8,7 +8,7 @@ fn main() {
         n: i128
     }
     if d < 0 {
-        a = a + d * (n - 1);
+        a += d * (n - 1);
         d = -d;
     }
     let s0 = a;
