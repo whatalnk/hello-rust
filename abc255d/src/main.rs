@@ -13,8 +13,8 @@ fn main() {
     for i in 1..n {
         b.push(b[i - 1] + a[i]);
     }
-    for i in 0..q {
-        let j = match a.binary_search(&x[i]) {
+    for xi in x.iter().take(q) {
+        let j = match a.binary_search(xi) {
             Ok(v) => v,
             Err(v) => {
                 if v > 0 {
@@ -26,13 +26,14 @@ fn main() {
         };
         let mut left = b[j];
         let mut right = b[n - 1] - b[j];
-        let mut cnt = (j + 1) as i64;
-        if x[i] < a[0] {
+        let cnt = if xi < &a[0] {
             right += left;
             left = 0;
-            cnt = 0;
-        }
-        let ans = (x[i] * cnt - left) + (right - x[i] * (n as i64 - cnt));
+            0
+        } else {
+            (j + 1) as i64
+        };
+        let ans = (xi * cnt - left) + (right - xi * (n as i64 - cnt));
         println!("{}", ans)
     }
 }
