@@ -8,9 +8,9 @@ fn main() {
         s: [Chars; h]
     }
     let mut o = vec![];
-    for i in 0..h {
-        for j in 0..w {
-            if s[i][j] == 'o' {
+    for (i, si) in s.iter().enumerate().take(h) {
+        for (j, sij) in si.iter().enumerate().take(w) {
+            if sij == &'o' {
                 o.push((i as i32, j as i32));
             }
         }
