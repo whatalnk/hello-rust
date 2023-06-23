@@ -16,8 +16,8 @@ fn main() {
         }
         a.push(row);
     }
-    for i in 0..n {
-        let s: String = a[i]
+    for ai in a.iter().take(n) {
+        let s: String = ai
             .iter()
             .map(|x| x.to_string())
             .collect::<Vec<_>>()
