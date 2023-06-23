@@ -29,8 +29,8 @@ fn main() {
         cnt[i / f] += 1;
     }
     let mut ans = 0;
-    for i in 1..=n {
-        ans += cnt[i] * cnt[i];
+    for cnti in cnt.iter().take(n + 1).skip(1) {
+        ans += cnti * cnti;
     }
     println!("{}", ans);
 }
