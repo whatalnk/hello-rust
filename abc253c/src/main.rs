@@ -29,7 +29,7 @@ fn main() {
                 }
             }
             3 => {
-                let xmin = bs.iter().nth(0).unwrap();
+                let xmin = bs.iter().next().unwrap();
                 let xmax = bs.iter().last().unwrap();
                 println!("{}", xmax - xmin);
             }
