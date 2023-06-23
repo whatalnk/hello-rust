@@ -8,7 +8,7 @@ fn main() {
         xy: [(f64, f64); n]
     }
     let b: Vec<usize> = (1..=n).filter(|x| !a.contains(x)).collect();
-    let mut bb: Vec<f64> = vec![10000000000.0; n - k];
+    let mut bb: Vec<f64> = vec![10_000_000_000.0; n - k];
     for i in 0..k {
         for j in 0..(n - k) {
             let l = ((xy[a[i] - 1].0 - xy[b[j] - 1].0).powf(2.0)
@@ -18,8 +18,8 @@ fn main() {
         }
     }
     let mut ans: f64 = 0.0;
-    for j in 0..(n - k) {
-        ans = ans.max(bb[j]);
+    for bbj in bb.iter().take(n - k) {
+        ans = ans.max(*bbj);
     }
     println!("{}", ans);
 }
