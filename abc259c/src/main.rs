@@ -9,12 +9,12 @@ fn main() {
     let mut ss = vec![];
     let mut cur = s[0];
     let mut cnt = 0;
-    for i in 0..s.len() {
-        if s[i] == cur {
+    for si in &s {
+        if si == &cur {
             cnt += 1;
         } else {
             ss.push((cur, cnt));
-            cur = s[i];
+            cur = *si;
             cnt = 1;
         }
     }
@@ -23,12 +23,12 @@ fn main() {
     let mut tt = vec![];
     let mut cur = t[0];
     let mut cnt = 0;
-    for i in 0..t.len() {
-        if t[i] == cur {
+    for ti in &t {
+        if ti == &cur {
             cnt += 1;
         } else {
             tt.push((cur, cnt));
-            cur = t[i];
+            cur = *ti;
             cnt = 1;
         }
     }
