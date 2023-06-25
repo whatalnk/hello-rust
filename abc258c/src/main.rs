@@ -10,10 +10,10 @@ fn main() {
     }
     let mut st = 1;
     let mut ed = n;
-    for i in 0..q {
-        let (t, x) = query[i];
-        if t == 1 {
-            if ed >= x {
+    for queryi in query.iter().take(q) {
+        let (t, x) = queryi;
+        if t == &1 {
+            if &ed >= x {
                 st = ed - x + 1;
             } else {
                 st = n + ed - x + 1;
