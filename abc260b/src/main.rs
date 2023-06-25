@@ -33,7 +33,7 @@ fn main() {
         ans.push(i);
     }
     ans.sort();
-    for i in 0..ans.len() {
-        println!("{}", ans[i]);
+    for ansi in &ans {
+        println!("{}", ansi);
     }
 }
