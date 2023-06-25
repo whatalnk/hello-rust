@@ -1,3 +1,5 @@
+#![allow(clippy::many_single_char_names)]
+
 use proconio::input;
 use std::collections::VecDeque;
 
@@ -27,8 +29,8 @@ fn main() {
     }
     let mut s = vec![];
     let mut t = vec![];
-    for i in 0..n {
-        let (xi, yi, ri) = xyr[i];
+    for (i, xyri) in xyr.iter().enumerate().take(n) {
+        let (xi, yi, ri) = xyri;
         if ri * ri == (xi - sx) * (xi - sx) + (yi - sy) * (yi - sy) {
             s.push(i);
         }
@@ -42,12 +44,12 @@ fn main() {
         q.push_back(s[k]);
         let mut visited = vec![false; n];
         visited[s[k]] = true;
-        while q.len() > 0 {
+        while !q.is_empty() {
             let i = q.pop_front().unwrap();
-            for j in 0..n {
-                if g[i][j] == 1 && !visited[j] {
+            for (j, visitedj) in visited.iter_mut().enumerate().take(n) {
+                if g[i][j] == 1 && !*visitedj {
                     q.push_back(j);
-                    visited[j] = true;
+                    *visitedj = true;
                 }
             }
         }
