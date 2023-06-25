@@ -12,21 +12,21 @@ impl S {
         let mut q = VecDeque::new();
         q.push_back(st);
         done[st] = true;
-        while q.len() > 0 {
+        while !q.is_empty() {
             let i = q.pop_front().unwrap();
-            for j in 0..self.n {
-                if g[i][j] == 0 && !done[j] {
+            for (j, donej) in done.iter_mut().enumerate().take(self.n) {
+                if g[i][j] == 0 && !*donej {
                     let (xi, yi, pi) = self.xyp[i];
                     let (xj, yj, _) = self.xyp[j];
                     if s * pi - ((xi - xj).abs() + (yi - yj).abs()) >= 0 {
                         g[i][j] = 1;
-                        done[j] = true;
+                        *donej = true;
                         q.push_back(j);
                     }
                 }
             }
         }
-        return done.iter().all(|&x| x);
+        done.iter().all(|&x| x)
     }
 }
 
@@ -35,7 +35,7 @@ fn main() {
         n: usize,
         xyp: [(i64, i64, i64); n]
     }
-    let s = S { n: n, xyp: xyp };
+    let s = S { n, xyp };
     let mut ans = 10_000_000_000;
     for i in 0..n {
         let mut left = 0;
