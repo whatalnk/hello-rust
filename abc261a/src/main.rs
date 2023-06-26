@@ -8,15 +8,15 @@ fn main() {
         r2: usize
     }
     let mut v = vec![0; 101];
-    for i in l1..=r1 {
-        v[i] += 1;
+    for vi in v.iter_mut().take(r1 + 1).skip(l1) {
+        *vi += 1;
     }
-    for i in l2..=r2 {
-        v[i] += 1;
+    for vi in v.iter_mut().take(r2 + 1).skip(l2) {
+        *vi += 1;
     }
     let mut ans = 0;
-    for i in 0..101 {
-        if v[i] == 2 {
+    for vi in v.iter().take(101) {
+        if vi == &2 {
             ans += 1;
         }
     }
