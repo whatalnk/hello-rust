@@ -15,16 +15,14 @@ fn main() {
                 } else {
                     continue;
                 }
+            } else if (a[i][j] == 'D' && a[j][i] == 'D')
+                || (a[i][j] == 'W' && a[j][i] == 'L')
+                || (a[i][j] == 'L' && a[j][i] == 'W')
+            {
+                continue;
             } else {
-                if (a[i][j] == 'D' && a[j][i] == 'D')
-                    || (a[i][j] == 'W' && a[j][i] == 'L')
-                    || (a[i][j] == 'L' && a[j][i] == 'W')
-                {
-                    continue;
-                } else {
-                    println!("incorrect");
-                    return;
-                }
+                println!("incorrect");
+                return;
             }
         }
     }
