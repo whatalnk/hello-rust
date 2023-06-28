@@ -15,14 +15,11 @@ fn main() {
         b[i + 1] = b[i] + a[i];
     }
     let mut hs = HashSet::<i64>::new();
-    for i in 0..=n {
-        hs.insert(b[i]);
+    for bi in b.iter().take(n + 1) {
+        hs.insert(*bi);
     }
-    for x in 0..=n {
-        if hs.contains(&(b[x] + p))
-            && hs.contains(&(b[x] + p + q))
-            && hs.contains(&(b[x] + p + q + r))
-        {
+    for bx in b.iter().take(n + 1) {
+        if hs.contains(&(bx + p)) && hs.contains(&(bx + p + q)) && hs.contains(&(bx + p + q + r)) {
             println!("Yes");
             return;
         }
