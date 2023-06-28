@@ -20,10 +20,8 @@ fn main() {
     for i in 0..n {
         if a[i] == (i + 1) as i64 {
             ans += c[n - 1] - c[i];
-        } else {
-            if i < (a[i] - 1) as usize && a[(a[i] - 1) as usize] == (i + 1) as i64 {
-                ans += 1;
-            }
+        } else if i < (a[i] - 1) as usize && a[(a[i] - 1) as usize] == (i + 1) as i64 {
+            ans += 1;
         }
     }
     println!("{}", ans);
