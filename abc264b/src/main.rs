@@ -8,9 +8,9 @@ fn main() {
     let mut m = vec![vec![0; 15]; 15];
     let st = vec![1usize, 3, 5, 7];
 
-    for i in 0..4 {
+    for sti in st.iter().take(4) {
         // right
-        let s = st[i];
+        let s = sti;
         let l = 15 - (s - 1) * 2;
         let rr = s - 1;
         for cc in 0..l {
