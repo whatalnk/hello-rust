@@ -6,8 +6,8 @@ fn main() {
         a: [i64; 5],
     }
     let mut hs = HashSet::new();
-    for i in 0..5 {
-        hs.insert(a[i]);
+    for ai in a.iter().take(5) {
+        hs.insert(ai);
     }
     println!("{}", hs.len());
 }
