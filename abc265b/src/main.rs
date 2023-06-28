@@ -9,12 +9,12 @@ fn main() {
         xy: [(usize, i64); m],
     }
     let mut b = vec![0; n + 1];
-    for i in 0..m {
-        let (x, y) = xy[i];
-        b[x] = y;
+    for xyi in xy.iter().take(m) {
+        let (x, y) = xyi;
+        b[*x] = *y;
     }
     let mut ans = true;
-    for i in 1..=(n - 1) {
+    for i in 1..n {
         if t > a[i - 1] {
             t -= a[i - 1];
             t += b[i + 1];
