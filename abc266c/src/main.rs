@@ -3,7 +3,7 @@ use proconio::input;
 fn cross_product(p1: (i64, i64), o: (i64, i64), p2: (i64, i64)) -> i64 {
     let op1 = (p1.0 - o.0, p1.1 - o.1);
     let op2 = (p2.0 - o.0, p2.1 - o.1);
-    return op1.0 * op2.1 - op1.1 * op2.0;
+    op1.0 * op2.1 - op1.1 * op2.0
 }
 
 fn main() {
