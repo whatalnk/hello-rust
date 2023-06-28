@@ -5,14 +5,14 @@ fn main() {
         n: usize,
         txa: [(usize, usize, i64); n],
     }
-    let t_max = 100001;
+    let t_max = 100_001;
     let minimum = -1_000_000_000_000_000_000i64;
     let mut xx = vec![0; t_max];
     let mut aa = vec![0; t_max];
-    for i in 0..n {
-        let (t, x, a) = txa[i];
-        xx[t] = x;
-        aa[t] = a;
+    for txai in txa.iter().take(n) {
+        let (t, x, a) = txai;
+        xx[*t] = *x;
+        aa[*t] = *a;
     }
     let mut g = vec![vec![minimum; t_max]; 5];
     g[0][0] = 0;
@@ -29,8 +29,8 @@ fn main() {
         g[xx[t]][t] += aa[t];
     }
     let mut ans = 0;
-    for i in 0..5 {
-        ans = ans.max(g[i][t_max - 1]);
+    for gi in g.iter().take(5) {
+        ans = ans.max(gi[t_max - 1]);
     }
     println!("{}", ans);
 }
