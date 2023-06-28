@@ -6,7 +6,7 @@ fn main() {
         a: [i64; n]
     }
     let mut ans: i64 = 0;
-    let md: i64 = 998244353;
+    let md: i64 = 998_244_353;
     for i in 1..=n {
         let mut dp = vec![vec![vec![0; i]; i + 1]; n + 1];
         dp[0][0][0] = 1;
