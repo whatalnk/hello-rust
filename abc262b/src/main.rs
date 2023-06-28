@@ -7,8 +7,8 @@ fn main() {
         uv: [(usize, usize); m]
     }
     let mut g = vec![vec![false; n]; n];
-    for i in 0..m {
-        let (u, v) = uv[i];
+    for uvi in uv.iter().take(m) {
+        let (u, v) = uvi;
         g[u - 1][v - 1] = true;
         g[v - 1][u - 1] = true;
     }
