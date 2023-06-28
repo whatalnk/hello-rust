@@ -11,8 +11,8 @@ fn main() {
         b[i + 1] = b[i] + a[i];
     }
     let mut s = 0;
-    for i in 0..m {
-        s += (i as i64 + 1) * a[i];
+    for (i, ai) in a.iter().enumerate().take(m) {
+        s += (i as i64 + 1) * ai;
     }
     let mut ans = s;
     for i in 1..(n - m + 1) {
