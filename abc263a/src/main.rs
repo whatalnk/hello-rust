@@ -10,11 +10,11 @@ fn main() {
     }
     let mut two = false;
     let mut three = false;
-    for i in 0..14 {
-        if v[i] == 2 {
+    for vi in v.iter().take(14) {
+        if vi == &2 {
             two = true;
         }
-        if v[i] == 3 {
+        if vi == &3 {
             three = true;
         }
     }
