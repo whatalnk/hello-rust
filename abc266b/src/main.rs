@@ -4,7 +4,7 @@ fn main() {
     input! {
         n: i64,
     }
-    let d = 998244353i64;
+    let d: i64 = 998_244_353;
     if n % d >= 0 {
         println!("{}", (n % d))
     } else {
