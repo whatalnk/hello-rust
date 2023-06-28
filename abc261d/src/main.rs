@@ -9,14 +9,14 @@ fn main() {
     }
     x.insert(0, 0);
     let mut y = vec![0; n + 1];
-    for i in 0..m {
-        let (c, y_) = cy[i];
-        y[c] = y_;
+    for cyi in cy.iter().take(m) {
+        let (c, y_) = cyi;
+        y[*c] = *y_;
     }
     let mut dp = vec![vec![0; n + 1]; n + 1];
-    for i in 1..=n {
-        for j in 1..=i {
-            dp[i][j] = dp[i - 1][j - 1] + x[i] + y[j];
+    for (i, xi) in x.iter().enumerate().take(n + 1).skip(1) {
+        for (j, yj) in y.iter().enumerate().take(i + 1).skip(1) {
+            dp[i][j] = dp[i - 1][j - 1] + xi + yj;
         }
         dp[i][0] = 0;
         for j in 0..i {
