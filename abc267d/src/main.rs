@@ -6,7 +6,7 @@ fn main() {
         m: usize,
         a: [i64; n],
     }
-    let minimum = -1000000000000000000;
+    let minimum = -1_000_000_000_000_000_000;
     let mut dp = vec![vec![minimum; 2001]; 2001];
     dp[0][0] = 0i64;
     for i in 1..=n {
