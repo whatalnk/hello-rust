@@ -7,9 +7,9 @@ fn main() {
     }
     let mut ii = vec![];
     let mut jj = vec![];
-    for i in 0..10 {
-        for j in 0..10 {
-            if s[i][j] == '#' {
+    for (i, si) in s.iter().enumerate().take(10) {
+        for (j, sij) in si.iter().enumerate().take(10) {
+            if sij == &'#' {
                 ii.push(i + 1);
                 jj.push(j + 1);
             }
