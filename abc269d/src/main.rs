@@ -12,16 +12,16 @@ fn main() {
     let mut black = HashSet::<(i64, i64)>::new();
     let mut visited = HashSet::<(i64, i64)>::new();
 
-    for i in 0..n {
-        black.insert(xy[i]);
+    for xyi in xy.iter().take(n) {
+        black.insert(*xyi);
     }
     let mut ans = 0;
-    for i in 0..n {
-        if !visited.contains(&xy[i]) {
+    for xyi in xy.iter().take(n) {
+        if !visited.contains(xyi) {
             ans += 1;
             let mut q = vec![];
-            q.push(xy[i]);
-            while q.len() > 0 {
+            q.push(*xyi);
+            while !q.is_empty() {
                 if let Some((x, y)) = q.pop() {
                     visited.insert((x, y));
                     for d in 0..6 {
