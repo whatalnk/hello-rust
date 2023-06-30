@@ -9,30 +9,22 @@ fn main() {
     if x > 0 && y > 0 {
         if x < y {
             println!("{}", x);
+        } else if z > y {
+            println!("-1");
+        } else if z < 0 {
+            println!("{}", x + z.abs() * 2);
         } else {
-            if z > y {
-                println!("-1");
-            } else if z < 0 {
-                println!("{}", x + z.abs() * 2);
-            } else {
-                println!("{}", x);
-            }
+            println!("{}", x);
         }
     } else if x > 0 && y < 0 {
         println!("{}", x);
-    } else if x < 0 && y > 0 {
+    } else if (x < 0 && y > 0) || y < x {
         println!("{}", x.abs());
+    } else if z < y {
+        println!("-1");
+    } else if z > 0 {
+        println!("{}", x.abs() + z * 2);
     } else {
-        if y < x {
-            println!("{}", x.abs());
-        } else {
-            if z < y {
-                println!("-1");
-            } else if z > 0 {
-                println!("{}", x.abs() + z * 2);
-            } else {
-                println!("{}", x.abs());
-            }
-        }
+        println!("{}", x.abs());
     }
 }
