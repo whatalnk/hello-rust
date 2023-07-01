@@ -10,19 +10,19 @@ fn main() {
     }
     // bfs
     let mut g = vec![vec![]; n + 1];
-    for i in 0..(n - 1) {
-        let (u, v) = uv[i];
-        g[u].push(v);
-        g[v].push(u);
+    for uvi in uv.iter().take(n - 1) {
+        let (u, v) = uvi;
+        g[*u].push(*v);
+        g[*v].push(*u);
     }
 
-    let inf = 1000000000i64;
+    let inf: i64 = 1_000_000_000;
     let mut d = vec![inf; n + 1];
     d[x] = 0;
     let mut q = vec![];
     let mut prev = vec![-1; n + 1];
     q.push(x);
-    while q.len() > 0 {
+    while !q.is_empty() {
         if let Some(p) = q.pop() {
             if p == y {
                 break;
