@@ -8,8 +8,8 @@ fn main() {
         a: [usize; n],
     }
     let mut bts = BTreeMap::new();
-    for i in 0..n {
-        let e = bts.entry(a[i]).or_insert(0);
+    for ai in a.iter().take(n) {
+        let e = bts.entry(*ai).or_insert(0);
         *e += 1;
     }
     let mut hm = HashMap::new();
