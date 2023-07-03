@@ -9,7 +9,7 @@ fn main() {
         e: i64,
         f: i64,
     }
-    let m = 998244353;
+    let m = 998_244_353;
     let mut abc = a % m;
     abc *= b % m;
     abc %= m;
