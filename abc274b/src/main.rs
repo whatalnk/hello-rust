@@ -7,9 +7,9 @@ fn main() {
         c: [Chars; h],
     }
     let mut x = vec![0; w];
-    for i in 0..h {
-        for j in 0..w {
-            if c[i][j] == '#' {
+    for ci in c.iter().take(h) {
+        for (j, cij) in ci.iter().enumerate().take(w) {
+            if cij == &'#' {
                 x[j] += 1;
             }
         }
