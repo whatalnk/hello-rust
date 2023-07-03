@@ -15,7 +15,7 @@ fn main() {
         d[l] = d[a[i]] + 1;
         d[r] = d[a[i]] + 1;
     }
-    for k in 1..=(2 * n + 1) {
-        println!("{}", d[k]);
+    for dk in d.iter().take(2 * n + 1).skip(1) {
+        println!("{}", dk);
     }
 }
