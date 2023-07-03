@@ -8,18 +8,18 @@ fn main() {
 
     }
     let mut v = vec![HashSet::new(); m];
-    for i in 0..m {
+    for vi in v.iter_mut().take(m) {
         input!(k: usize);
         input!(x: [usize; k]);
-        for j in 0..k {
-            v[i].insert(x[j] - 1);
+        for xj in x.iter().take(k) {
+            vi.insert(xj - 1);
         }
     }
     for i in 0..n {
         for j in (i + 1)..n {
             let mut flag = false;
-            for k in 0..m {
-                if v[k].contains(&i) && v[k].contains(&j) {
+            for vk in v.iter().take(m) {
+                if vk.contains(&i) && vk.contains(&j) {
                     flag = true;
                     break;
                 }
