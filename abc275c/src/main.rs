@@ -1,10 +1,10 @@
 use proconio::{input, marker::Chars};
 use std::collections::BTreeSet;
 
-fn valid(x: isize, y: isize, s: &Vec<Vec<char>>) -> bool {
+fn valid(x: isize, y: isize, s: &[Vec<char>]) -> bool {
     let xx = x.min(8).max(0);
     let yy = y.min(8).max(0);
-    return xx == x && yy == y && s[xx as usize][yy as usize] == '#';
+    xx == x && yy == y && s[xx as usize][yy as usize] == '#'
 }
 
 fn main() {
