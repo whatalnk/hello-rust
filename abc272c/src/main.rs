@@ -7,11 +7,11 @@ fn main() {
     }
     let mut even = vec![];
     let mut odd = vec![];
-    for i in 0..n {
-        if a[i] % 2 == 0 {
-            even.push(a[i]);
+    for ai in a.iter().take(n) {
+        if ai % 2 == 0 {
+            even.push(ai);
         } else {
-            odd.push(a[i]);
+            odd.push(ai);
         }
     }
     let mut ans = 0i64;
