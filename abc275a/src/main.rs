@@ -7,10 +7,10 @@ fn main() {
     }
     let mut ans = 1;
     let mut amax = 0;
-    for i in 0..n {
-        if a[i] > amax {
+    for (i, ai) in a.iter().enumerate().take(n) {
+        if ai > &amax {
             ans = i + 1;
-            amax = a[i];
+            amax = *ai;
         }
     }
     println!("{}", ans);
