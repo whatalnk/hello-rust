@@ -6,8 +6,8 @@ fn main() {
     }
     let mut ans = -1;
     let n = s.len();
-    for i in 0..n {
-        if s[i] == 'a' {
+    for (i, si) in s.iter().enumerate().take(n) {
+        if si == &'a' {
             ans = (i + 1) as isize;
         }
     }
