@@ -32,13 +32,13 @@ fn main() {
     v.push(&n);
     let mut memo = BTreeMap::<i64, i64>::new();
     memo.insert(0, 1);
-    for i in 0..v.len() {
-        if v[i] > &0 {
-            let k1 = v[i] / 2;
+    for vi in &v {
+        if vi > &&0 {
+            let k1 = *vi / 2;
             let v1 = memo.get(&k1).copied().unwrap();
-            let k2 = v[i] / 3;
+            let k2 = *vi / 3;
             let v2 = memo.get(&k2).copied().unwrap();
-            memo.insert(v[i].clone(), v1 + v2);
+            memo.insert((*vi).clone(), v1 + v2);
         }
     }
     println!("{}", memo[&n]);
