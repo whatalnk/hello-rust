@@ -16,8 +16,8 @@ fn main() {
         println!("No");
         return;
     }
-    for i in 1..=6 {
-        if !s[i].is_ascii_digit() {
+    for si in s.iter().take(6 + 1).skip(1) {
+        if !si.is_ascii_digit() {
             println!("No");
             return;
         }
