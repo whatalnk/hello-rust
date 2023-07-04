@@ -7,8 +7,8 @@ fn main() {
         s: Chars,
     }
     let mut quotes = vec![];
-    for i in 0..n {
-        if s[i] == '"' {
+    for (i, si) in s.iter().enumerate().take(n) {
+        if si == &'"' {
             quotes.push(i);
         }
     }
@@ -25,6 +25,6 @@ fn main() {
         l = quotes[i];
     }
     let ss = &s[l..n].iter().collect::<String>().replace(",", ".");
-    ans.push(ss.replace(",", ".").clone());
+    ans.push(ss.replace(",", "."));
     println!("{}", ans.join(""));
 }
