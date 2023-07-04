@@ -7,24 +7,24 @@ fn main() {
         ab: [(usize, usize); n],
     }
     let mut hm = HashMap::<usize, Vec<usize>>::new();
-    for i in 0..n {
-        let (a, b) = ab[i];
-        let e = hm.entry(a).or_insert(vec![]);
-        e.push(b);
-        let e = hm.entry(b).or_insert(vec![]);
-        e.push(a);
+    for abi in ab.iter().take(n) {
+        let (a, b) = abi;
+        let e = hm.entry(*a).or_insert_with(|| vec![]);
+        e.push(*b);
+        let e = hm.entry(*b).or_insert_with(|| vec![]);
+        e.push(*a);
     }
     let mut que = VecDeque::new();
     que.push_back(1);
     let mut bts = BTreeSet::new();
     bts.insert(1);
-    while que.len() != 0 {
+    while !que.is_empty() {
         if let Some(v) = que.pop_front() {
             if let Some(g) = hm.get(&v) {
-                for i in 0..g.len() {
-                    if !bts.contains(&g[i]) {
-                        que.push_back(g[i]);
-                        bts.insert(g[i]);
+                for gi in &(*g) {
+                    if !bts.contains(gi) {
+                        que.push_back(*gi);
+                        bts.insert(*gi);
                     }
                 }
             }
