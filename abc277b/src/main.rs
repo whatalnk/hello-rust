@@ -11,8 +11,8 @@ fn main() {
         'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K',
     ];
     let mut hs = HashSet::new();
-    for i in 0..n {
-        let c = &s[i];
+    for si in s.iter().take(n) {
+        let c = si;
         if a.contains(&c[0]) && b.contains(&c[1]) {
             hs.insert(c);
         }
