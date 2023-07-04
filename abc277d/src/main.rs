@@ -1,3 +1,5 @@
+#![allow(clippy::many_single_char_names)]
+
 use proconio::input;
 use std::collections::BTreeMap;
 
@@ -9,10 +11,10 @@ fn main() {
     }
     let mut hm = BTreeMap::new();
     let mut asum = 0;
-    for i in 0..n {
-        let e = hm.entry(a[i]).or_insert(0);
+    for ai in a.iter().take(n) {
+        let e = hm.entry(*ai).or_insert(0);
         *e += 1;
-        asum += a[i];
+        asum += *ai;
     }
     let mut v = Vec::<(i64, i64)>::new();
     for (key, val) in hm.iter() {
@@ -30,7 +32,7 @@ fn main() {
             break;
         }
     }
-    let mut s = vec![0; 200005];
+    let mut s = vec![0; 200_005];
     for i in 0..k {
         let j = (p as usize + k - i) % k;
         s[j] = asum;
@@ -41,8 +43,8 @@ fn main() {
     }
 
     let mut ans = asum;
-    for i in 0..k {
-        ans = ans.min(s[i]);
+    for si in s.iter().take(k) {
+        ans = ans.min(*si);
     }
     println!("{}", ans);
 }
