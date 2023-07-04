@@ -1,7 +1,7 @@
 use proconio::input;
 
 fn f(a: f64, b: i64, n: i64) -> f64 {
-    return (b * n) as f64 + a / (n as f64 + 1.0).sqrt();
+    (b * n) as f64 + a / (n as f64 + 1.0).sqrt()
 }
 fn main() {
     input! {
