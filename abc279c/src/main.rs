@@ -1,17 +1,17 @@
 use proconio::{input, marker::Chars};
 
-fn transpose(v: &Vec<Vec<char>>) -> Vec<String> {
+fn transpose(v: &[Vec<char>]) -> Vec<String> {
     let h = v.len();
     let w = v[0].len();
     let mut ret = vec![];
     for i in 0..w {
         let mut c = vec![];
-        for j in 0..h {
-            c.push(v[j][i]);
+        for vj in v.iter().take(h) {
+            c.push(vj[i]);
         }
         ret.push(c.iter().collect::<String>());
     }
-    return ret;
+    ret
 }
 
 fn main() {
