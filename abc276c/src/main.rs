@@ -14,15 +14,14 @@ fn main() {
         if p[n - i - 1] > p[n - i - 2] {
             bts.insert(p[n - i - 2]);
         } else {
-            let prev = bts
+            let prev = *bts
                 .range((Included(&0), Excluded(&p[n - i - 2])))
                 .max()
-                .unwrap()
-                .clone();
+                .unwrap();
             bts.insert(p[n - i - 2]);
             bts.remove(&prev);
-            for j in 0..(n - i - 2) {
-                ans.push(p[j]);
+            for pj in p.iter().take(n - i - 2) {
+                ans.push(*pj);
             }
             ans.push(prev);
             break;
@@ -30,8 +29,8 @@ fn main() {
     }
     let mut v = bts.iter().collect::<Vec<&i64>>();
     v.reverse();
-    for i in 0..v.len() {
-        ans.push(*v[i]);
+    for vi in &v {
+        ans.push(**vi);
     }
     println!(
         "{}",
