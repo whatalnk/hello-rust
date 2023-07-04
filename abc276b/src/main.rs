@@ -8,14 +8,14 @@ fn main() {
         ab: [(usize, usize); m],
     }
     let mut al = vec![BTreeSet::<usize>::new(); n + 1];
-    for i in 0..m {
-        let (a, b) = ab[i];
-        al[a].insert(b);
-        al[b].insert(a);
+    for abi in ab.iter().take(m) {
+        let (a, b) = abi;
+        al[*a].insert(*b);
+        al[*b].insert(*a);
     }
-    for i in 1..=n {
-        let d = al[i].len();
-        let v = al[i].iter().collect::<Vec<&usize>>();
+    for ali in al.iter().take(n + 1).skip(1) {
+        let d = ali.len();
+        let v = ali.iter().collect::<Vec<&usize>>();
         println!(
             "{} {}",
             d,
