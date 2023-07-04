@@ -7,8 +7,8 @@ struct S {
 impl S {
     fn new(g: Vec<Vec<usize>>) -> S {
         S {
-            color: vec![0; 200005],
-            g: g,
+            color: vec![0; 200_005],
+            g,
         }
     }
     fn dfs(&mut self, v: usize, p: i64, c: i64) -> (i64, i64) {
@@ -34,7 +34,7 @@ impl S {
             ret.0 += res.0;
             ret.1 += res.1
         }
-        return ret;
+        ret
     }
 }
 
@@ -44,11 +44,11 @@ fn main() {
         m: usize,
         uv: [(usize, usize); m],
     }
-    let mut g = vec![vec![]; 200005];
-    for i in 0..m {
-        let (u, v) = uv[i];
-        g[u].push(v);
-        g[v].push(u);
+    let mut g = vec![vec![]; 200_005];
+    for uvi in uv.iter().take(m) {
+        let (u, v) = uvi;
+        g[*u].push(*v);
+        g[*v].push(*u);
     }
     let mut ans: i64 = (n * (n - 1) / 2 - m) as i64;
     let mut s = S::new(g);
