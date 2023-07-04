@@ -9,8 +9,8 @@ fn main() {
     let mut l = vec![];
     l.push(0);
     let mut total = 0;
-    for i in 0..n {
-        total += a[i];
+    for ai in a.iter().take(n) {
+        total += ai;
         l.push(total);
     }
     l.push(total * 2);
