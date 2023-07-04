@@ -8,8 +8,8 @@ fn main() {
         a: [i64; n],
     }
     let mut vd = VecDeque::new();
-    for i in 0..n {
-        vd.push_back(a[i].to_string());
+    for ai in a.iter().take(n) {
+        vd.push_back(ai.to_string());
     }
     for _ in 0..k {
         vd.pop_front();
