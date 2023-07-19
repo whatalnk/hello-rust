@@ -2532,6 +2532,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "abc297a"
+version = "0.1.0"
+dependencies = [
+ "cli_test_dir",
+ "proconio",
+]
+
+[[package]]
 name = "autocfg"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
