@@ -8,18 +8,14 @@ fn main() {
         s: Chars,
     }
     for i in 1..n {
-        let mut answer = false;
-        'outer: for l in 0..=(n - i) {
-            for k in 1..=l {
-                if s[k - 1] == s[k + i - 1] {
-                    println!("{}", l - 1);
-                    answer = true;
-                    break 'outer;
-                }
+        let mut ans = 0;
+        for k in 1..=(n - i) {
+            if s[k - 1] != s[k + i - 1] {
+                ans += 1;
+            } else {
+                break;
             }
         }
-        if !answer {
-            println!("{}", n - i);
-        }
+        println!("{}", ans);
     }
 }
