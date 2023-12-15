@@ -1,0 +1,10 @@
+[package]
+name = "abc290b"
+version = "0.1.0"
+edition = "2021"
+
+[dev-dependencies]
+cli_test_dir = "*"
+
+[dependencies]
+proconio = { version = "=0.4.5", features = ["derive"] }
